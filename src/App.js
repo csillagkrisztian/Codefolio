@@ -11,22 +11,10 @@ import Login from "./pages/Login";
 import { useDispatch, useSelector } from "react-redux";
 import { selectAppLoading } from "./store/appState/selectors";
 import { getUserWithStoredToken } from "./store/user/actions";
-import { Jumbotron } from "react-bootstrap";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import MyProfilePage from "./pages/MyProfilePage/MyProfilePage";
 import ProjectPage from "./pages/ProjectPage/ProjectPage";
 import HomePage from "./pages/HomePage/HomePage";
-
-const Home = () => (
-  <Jumbotron>
-    <h1>Home</h1>
-  </Jumbotron>
-);
-const Other = () => (
-  <Jumbotron>
-    <h1>Other</h1>
-  </Jumbotron>
-);
 
 function App() {
   const dispatch = useDispatch();
