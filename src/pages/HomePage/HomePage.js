@@ -11,8 +11,8 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
   },
   postImage: {
-    height: "256px",
-    width: "448px",
+    height: "13rem",
+    width: "26rem",
     objectFit: "cover",
   },
 }));
@@ -70,6 +70,7 @@ export default function HomePage() {
                   direction="row"
                   justify="center"
                   alignItems="center"
+                  spacing={3}
                 >
                   <Grid item xs={4}>
                     <img
