@@ -1,4 +1,21 @@
 import React from "react";
+import Grid from "@material-ui/core/Grid";
+import { makeStyles } from "@material-ui/core/styles";
+import { Paper } from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  title: {
+    textAlign: "center",
+  },
+  postImage: {
+    height: "256px",
+    width: "448px",
+    objectFit: "cover",
+  },
+}));
 
 export default function HomePage() {
   const projects = [
@@ -36,5 +53,42 @@ export default function HomePage() {
     },
   ];
 
-  return <div>HomePage</div>;
+  const classes = useStyles();
+
+  return (
+    <div className={classes.root}>
+      <Grid container justify="center" spacing={3}>
+        <Grid item xs={10}>
+          <h1 className={classes.title}>CodeFolio</h1>
+        </Grid>
+        {projects.map((project, id) => {
+          return (
+            <Grid item xs={10} key={id + 1}>
+              <Paper>
+                <Grid
+                  container
+                  direction="row"
+                  justify="center"
+                  alignItems="center"
+                >
+                  <Grid item xs={4}>
+                    <img
+                      className={classes.postImage}
+                      src={project.projectImg}
+                    ></img>
+                  </Grid>
+                  <Grid item xs={3}>
+                    <h2 className={classes.title}>{project.projectName}</h2>
+                  </Grid>
+                  <Grid item xs={5}>
+                    {project.projectDes}
+                  </Grid>
+                </Grid>
+              </Paper>
+            </Grid>
+          );
+        })}
+      </Grid>
+    </div>
+  );
 }
