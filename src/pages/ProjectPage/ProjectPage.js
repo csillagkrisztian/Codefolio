@@ -2,6 +2,8 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { Grid, Typography } from "@material-ui/core";
 import "./ProjectPage.css";
+import Carousel from "react-material-ui-carousel";
+import Item from "../../components/CarouselItem/CarouselItem";
 
 export default function ProfilePage() {
   const user = {
@@ -77,10 +79,31 @@ export default function ProfilePage() {
               {neededPost.beLink}
             </Typography>
           </Grid>
-          <Grid item xs={8}>
+          <Grid
+            item
+            container
+            justify="center"
+            alignContent="center"
+            spacing={5}
+            xs={8}
+          >
             <h1 className="title">{neededPost.projectName}</h1>
             <img className="projectimage" src={neededPost.projectImg}></img>
             <Typography>{neededPost.projectDes}</Typography>
+
+            <Grid item>
+              <Carousel className="carousel" autoPlay={false}>
+                {projects.map(({ projectImg, projectDes }, id) => {
+                  return (
+                    <Item
+                      key={id + 1}
+                      projectImg={projectImg}
+                      description={projectDes}
+                    />
+                  );
+                })}
+              </Carousel>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>
