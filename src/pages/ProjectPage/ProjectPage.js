@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Grid, Typography } from "@material-ui/core";
+import { Grid, Typography, Chip } from "@material-ui/core";
 import "./ProjectPage.css";
 import Carousel from "react-material-ui-carousel";
 import Item from "../../components/CarouselItem/CarouselItem";
@@ -24,7 +24,7 @@ export default function ProfilePage() {
     <Loading />
   ) : (
     <div className="root">
-      <Grid container justify="center" spacing={3}>
+      <Grid container justify="center" spacing={4}>
         <Grid item container justify="center" xs={12}>
           <Grid item xs={3}>
             <br />
@@ -63,6 +63,11 @@ export default function ProfilePage() {
             xs={8}
           >
             <h1 className="title">{projectViewed.project.projectName}</h1>
+            <Grid item>
+              {projectViewed.project.tags.map((t) => {
+                return <Chip variant="outlined" label={t.tagName} />;
+              })}
+            </Grid>
             <img
               className="projectimage"
               src={projectViewed.project.projectImg}
