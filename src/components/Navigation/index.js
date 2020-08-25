@@ -4,29 +4,32 @@ import { useSelector } from "react-redux";
 import { selectToken } from "../../store/user/selectors";
 import LoggedIn from "./LoggedIn";
 import LoggedOut from "./LoggedOut";
-import { NavLink } from 'react-router-dom';
-import './Navigation.css';
-
-
+import { NavLink } from "react-router-dom";
+import "./Navigation.css";
 
 export default function Navigation() {
   const token = useSelector(selectToken);
 
   const loginLogoutControls = token ? <LoggedIn /> : <LoggedOut />;
 
-
   function handleClick(event) {
     event.preventDefault();
-    console.info('You clicked a breadcrumb.');
+    console.info("You clicked a breadcrumb.");
   }
   return (
-    <div >
+    <div>
       <div className="navigating-bar">
         <div></div>
         <div className="navi">
-          <NavLink exact activeClassName="active-link" to='/'>Home</NavLink>
-          <NavLink activeClassName="active-link" to='/about'>About</NavLink>
-          <NavLink activeClassName="active-link" to='project'>Projects</NavLink>
+          <NavLink exact activeClassName="active-link" to="/">
+            Home
+          </NavLink>
+          <NavLink activeClassName="active-link" to="/aboutus">
+            About
+          </NavLink>
+          <NavLink activeClassName="active-link" to="/post">
+            Post a Project
+          </NavLink>
         </div>
         {loginLogoutControls}
       </div>
@@ -36,4 +39,3 @@ export default function Navigation() {
     </div>
   );
 }
-
