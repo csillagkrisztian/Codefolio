@@ -1,7 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import { Paper } from "@material-ui/core";
+import SearchBar from "material-ui-search-bar";
+import './HomePage.css';
+import clsx from 'clsx';
+import Drawer from '@material-ui/core/Drawer';
+import Button from '@material-ui/core/Button';
+import List from '@material-ui/core/List';
+import Divider from '@material-ui/core/Divider';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import MailIcon from '@material-ui/icons/Mail';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -12,12 +25,27 @@ const useStyles = makeStyles((theme) => ({
   },
   postImage: {
     height: "13rem",
-    width: "26rem",
+    width: "100%",
     objectFit: "cover",
   },
+  list: {
+    width: 250,
+
+  },
+  fullList: {
+    width: 'auto'
+  }
 }));
 
+
+
 export default function HomePage() {
+  const [open, set_open] = useState(false);
+  const [searchText, set_searchText] = useState('');
+  const classes = useStyles();
+  const toggleDrawer = () => set_open(!open);
+
+
   const projects = [
     {
       projectName: "I made an app that can count beans",
@@ -53,13 +81,25 @@ export default function HomePage() {
     },
   ];
 
-  const classes = useStyles();
+  console.log(searchText);
+
 
   return (
     <div className={classes.root}>
+
+      <Drawer anchor='right' open={open} onClose={toggleDrawer}>
+        <h1>Here goes the chat!</h1>
+        {/*list(anchor)*/}
+      </Drawer>
+
+      <Button onClick={toggleDrawer}>Open Chat</Button>
+
+      <SearchBar value={searchText} onChange={e => set_searchText(e)} className="search-bar" />
+
       <Grid container justify="center" spacing={3}>
+
         <Grid item xs={10}>
-          <h1 className={classes.title}>CodeFolio</h1>
+
         </Grid>
         {projects.map((project, id) => {
           return (
