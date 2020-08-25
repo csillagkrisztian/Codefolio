@@ -12,11 +12,13 @@ import { getProfile } from "../../store/user/actions";
 export default function ProfilePage() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const user = useSelector(selectUserViewing);
 
   useEffect(() => {
     dispatch(getProfile(parseInt(id)));
   }, []);
+
+  const user = useSelector(selectUserViewing);
+
   console.log(user);
 
   return !user ? (

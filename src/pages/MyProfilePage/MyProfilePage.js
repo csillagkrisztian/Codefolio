@@ -22,17 +22,17 @@ export default function MyProfilePage() {
 
             <EditIcon />
           </h1>
-          <img className="profile-main-image" src={user.profileImg}></img>
+          <img className="profile-main-image" src={user.userImg}></img>
           <Typography>
             Github:
             <br />
-            {user.ghLink}
+            {user.githubLink}
             <EditIcon />
           </Typography>
           <Typography>
             LinkedIn:
             <br />
-            {user.liLink}
+            {user.linkedinLink}
             <EditIcon />
           </Typography>
         </Grid>
