@@ -58,12 +58,15 @@ export default function ProfilePage() {
             item
             container
             justify="center"
-            alignContent="center"
+            alignItems="center"
+            direction="column"
             spacing={5}
             xs={8}
           >
-            <h1 className="title">{projectViewed.project.projectName}</h1>
-            <Grid item>
+            <Grid item xs>
+              <h1 className="title">{projectViewed.project.projectName}</h1>
+            </Grid>
+            <Grid item xs>
               {projectViewed.project.tags.map((t, id) => {
                 return (
                   <Chip key={id + 1} variant="outlined" label={t.tagName} />
@@ -76,7 +79,7 @@ export default function ProfilePage() {
             ></img>
             <Typography>{projectViewed.project.projectDes}</Typography>
 
-            <Grid item>
+            <Grid item xs>
               <Carousel className="carousel" autoPlay={false}>
                 {projectViewed.project.resources.map(
                   ({ projectImg, projectDes }, id) => {
