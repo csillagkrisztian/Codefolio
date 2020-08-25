@@ -1,5 +1,5 @@
 const initialState = {
-  project: null,
+  projectViewed: null,
   projectToBe: null,
 };
 
