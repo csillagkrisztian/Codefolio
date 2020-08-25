@@ -64,8 +64,10 @@ export default function ProfilePage() {
           >
             <h1 className="title">{projectViewed.project.projectName}</h1>
             <Grid item>
-              {projectViewed.project.tags.map((t) => {
-                return <Chip variant="outlined" label={t.tagName} />;
+              {projectViewed.project.tags.map((t, id) => {
+                return (
+                  <Chip key={id + 1} variant="outlined" label={t.tagName} />
+                );
               })}
             </Grid>
             <img
