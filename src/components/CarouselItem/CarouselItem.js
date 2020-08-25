@@ -1,5 +1,5 @@
 import React from "react";
-import { Paper, Button, Typography } from "@material-ui/core";
+import { Paper, Typography } from "@material-ui/core";
 import "./CarouselItem.css";
 
 export default function Item(props) {

@@ -1,0 +1,23 @@
+.root {
+  flex-grow: 1;
+}
+
+.profile-main-image {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  position: relative;
+  width: 300px;
+  height: 300px;
+  overflow: hidden;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.profile {
+  text-align: center;
+}
+
+.profile-title {
+  font-size: 32px;
+}
