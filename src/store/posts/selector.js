@@ -1,1 +1,0 @@
-export const posts = state => state.posts.posts;

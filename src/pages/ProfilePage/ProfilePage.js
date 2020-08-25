@@ -15,7 +15,7 @@ export default function ProfilePage() {
 
   useEffect(() => {
     dispatch(getProfile(parseInt(id)));
-  }, []);
+  }, [dispatch]);
 
   const user = useSelector(selectUserViewing);
 
