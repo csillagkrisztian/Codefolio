@@ -49,7 +49,9 @@ export default function AboutPage() {
               more experienced peers by examining their projects closely and
               understanding the recoursces necessary to achieve their goals as a
               developer. We are very proud of .codeFolio, because for us this
-              was our jab at putting our foot in the door of a coding career.
+              was our jab at putting our foot in the door of a coding career. If
+              you want to know more about us, feel free to click on our faces to
+              see our github profiles ;)
             </p>
           </Grid>
         </Grid>
