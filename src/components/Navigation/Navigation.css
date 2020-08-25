@@ -1,9 +1,8 @@
 .navigating-bar{
-    height: 80px;
+    padding:25px 0;
     background-color: rgb(38, 80, 216);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr ;
     color: #fff;
 }
 .logo-bar{
@@ -25,4 +24,10 @@
 .active-link{
     font-size: 20px;
     text-decoration-line: underline;
+}
+
+.navi{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

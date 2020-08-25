@@ -1,19 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchPosts } from '../../store/posts/action';
+import { posts } from '../../store/posts/selector';
+
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
-import { Paper } from "@material-ui/core";
+import { Paper, Drawer, Button, Icon } from "@material-ui/core";
 import SearchBar from "material-ui-search-bar";
+import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import './HomePage.css';
-import clsx from 'clsx';
-import Drawer from '@material-ui/core/Drawer';
-import Button from '@material-ui/core/Button';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -40,46 +37,21 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function HomePage() {
+  const dispatch = useDispatch();
+  const allPosts = useSelector(posts);
   const [open, set_open] = useState(false);
   const [searchText, set_searchText] = useState('');
   const classes = useStyles();
   const toggleDrawer = () => set_open(!open);
 
+  console.log(allPosts);
 
-  const projects = [
-    {
-      projectName: "I made an app that can count beans",
-      feLink: "beancounter-frontend.com",
-      beLink: "beancounter-backend.com",
-      projectImg:
-        "https://cdn.loveandlemons.com/wp-content/uploads/2020/03/beans.jpg",
-      ytUrl: "youtube.com/beancounter",
-      projectDes:
-        "My mother is very angry at me every time I get a bad grade in Math, and forces me to count beans, the jokes on her, if she wants to know if it's correct, she has to count herself",
-      userId: 3,
-    },
-    {
-      projectName: "An app that does your math homework",
-      feLink: "mathsux-frontend.com",
-      beLink: "mathsux-backend.com",
-      projectImg: "https://i.ytimg.com/vi/Kp2bYWRQylk/maxresdefault.jpg",
-      ytUrl: "youtube.com/mathsux",
-      projectDes:
-        "I only like math if it's in python, this app solves my problems, literally",
-      userId: 1,
-    },
-    {
-      projectName: "Hot single men in your area",
-      feLink: "hotsinglemen-frontend.com",
-      beLink: "hotsinglemen-backend.com",
-      projectImg:
-        "https://qph.fs.quoracdn.net/main-qimg-1694bca506b96e0cb542a000a947bdc2.webp",
-      ytUrl: "youtube.com/hotsinglemen",
-      projectDes:
-        "I don't like to see only hot single ladies in my area, as a woman I want to see hot single men instead",
-      userId: 2,
-    },
-  ];
+
+  useEffect(
+    function () {
+      dispatch(fetchPosts);
+    }, []
+  )
 
   console.log(searchText);
 
@@ -91,7 +63,7 @@ export default function HomePage() {
         <h1>Here goes the chat!</h1>
         {/*list(anchor)*/}
       </Drawer>
-
+      <ChatBubbleOutlineIcon onClick={toggleDrawer} className="chat-btn" />
       <Button onClick={toggleDrawer}>Open Chat</Button>
 
       <SearchBar value={searchText} onChange={e => set_searchText(e)} className="search-bar" />
@@ -101,7 +73,7 @@ export default function HomePage() {
         <Grid item xs={10}>
 
         </Grid>
-        {projects.map((project, id) => {
+        {!allPosts.length > 0 ? <h1>Loading...</h1> : allPosts.map((project, id) => {
           return (
             <Grid item xs={10} key={id + 1}>
               <Paper>
@@ -122,7 +94,7 @@ export default function HomePage() {
                     <h2 className={classes.title}>{project.projectName}</h2>
                   </Grid>
                   <Grid item xs={5}>
-                    {project.projectDes}
+                    {project.projectDesc}
                   </Grid>
                 </Grid>
               </Paper>
