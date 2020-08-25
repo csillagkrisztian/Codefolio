@@ -15,6 +15,7 @@ import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import MyProfilePage from "./pages/MyProfilePage/MyProfilePage";
 import ProjectPage from "./pages/ProjectPage/ProjectPage";
 import HomePage from "./pages/HomePage/HomePage";
+import AboutPage from "./pages/AboutPage/AboutPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,7 +34,8 @@ function App() {
         <Route exact path="/" component={HomePage} />
         <Route path="/project/:id" component={ProjectPage} />
         <Route path="/profile/:id" component={ProfilePage} />
-        <Route path="/myprofile/" component={MyProfilePage} />
+        <Route path="/myprofile" component={MyProfilePage} />
+        <Route path="/aboutus" component={AboutPage} />
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />
       </Switch>
