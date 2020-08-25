@@ -2,3 +2,9 @@
     width: 70%;
     margin: 15px auto;
 }
+.chat-btn{
+    font-size: 35px;
+    position: fixed;
+    bottom: 0;
+    right: 10px;
+}
