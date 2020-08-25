@@ -47,3 +47,7 @@ export const getProject = (id) => {
 export const addProject = (data) => {
   return { type: "ADD_PROJECT", payload: data };
 };
+
+export const addResource = (data) => {
+  return { type: "ADD_RESOURCE", payload: data };
+};

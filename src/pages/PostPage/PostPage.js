@@ -1,7 +1,9 @@
-import React, { useState } from "react";
-import { Grid } from "@material-ui/core";
+import React, { useState, useEffect } from "react";
+import { Grid, Button } from "@material-ui/core";
 import { Form } from "react-bootstrap";
 import ResourceForm from "../../components/ResourceForm";
+import { useSelector } from "react-redux";
+import { selectProjectToBeResources } from "../../store/projects/selector";
 
 export default function PostPage() {
   const [name, setName] = useState("");
@@ -10,6 +12,17 @@ export default function PostPage() {
   const [youtubeUrl, setYoutubeUrl] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [description, setDescription] = useState("");
+  const [valid, setValid] = useState(false);
+
+  const resources = useSelector(selectProjectToBeResources);
+
+  useEffect(() => {
+    if (resources.length > 1) {
+      setValid(true);
+    }
+  }, [resources]);
+
+  console.log(resources);
   return (
     <div>
       <Grid
@@ -49,6 +62,11 @@ export default function PostPage() {
               <Form.Label>Tags</Form.Label>
               <Form.Control as="textarea" rows="2"></Form.Control>
             </Form.Group>
+            {valid ? (
+              <Button>Submit</Button>
+            ) : (
+              <p>Please add at least 2 resources</p>
+            )}
           </Form>
         </Grid>
         <Grid item container justify="center">

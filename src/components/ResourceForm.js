@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import { Button, Paper } from "@material-ui/core";
+import { useDispatch } from "react-redux";
+import { addResource } from "../store/projects/action";
 
 export default function ResourceForm(props) {
   const [name, setName] = useState("");
@@ -8,17 +10,25 @@ export default function ResourceForm(props) {
   const [imgUrl, setImgUrl] = useState("");
   const [description, setDescription] = useState("");
 
+  const dispatch = useDispatch();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     if ((!name, !link, !imgUrl, !description)) {
       console.log("what the heck?");
     } else {
-      console.log({ name, link, imgUrl, description });
+      dispatch(
+        addResource({
+          title: name,
+          link,
+          resourceImg: imgUrl,
+          resourceDes: description,
+        })
+      );
       setName("");
       setLink("");
       setImgUrl("");
       setDescription("");
-      //TODO dispatch to postToBe
     }
   };
 
