@@ -12,86 +12,105 @@ import { useSelector } from "react-redux";
 import { selectToken } from "../../store/user/selectors";
 import LoggedIn from "./LoggedIn";
 import LoggedOut from "./LoggedOut";
+import Breadcrumbs from '@material-ui/core/Breadcrumbs';
+import { NavLink } from 'react-router-dom';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
-}));
+import './Navigation.css';
+
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     flexGrow: 1,
+//   },
+//   menuButton: {
+//     marginRight: theme.spacing(2),
+//   },
+//   title: {
+//     flexGrow: 1,
+//   },
+// }));
 
 export default function Navigation() {
   const token = useSelector(selectToken);
-  const classes = useStyles();
+  // const classes = useStyles();
 
   const loginLogoutControls = token ? <LoggedIn /> : <LoggedOut />;
 
-  const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+  // const handleMenu = (event) => {
+  //   setAnchorEl(event.currentTarget);
+  // };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  // const handleClose = () => {
+  //   setAnchorEl(null);
+  // };
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
+  // const [anchorEl, setAnchorEl] = React.useState(null);
+  // const open = Boolean(anchorEl);
+  function handleClick(event) {
+    event.preventDefault();
+    console.info('You clicked a breadcrumb.');
+  }
   return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-            onClick={() => {
-              console.log("hey!");
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            Photos
-          </Typography>
-          {loginLogoutControls && (
-            <div>
-              <IconButton
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={open}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
-              </Menu>
-            </div>
-          )}
-        </Toolbar>
-      </AppBar>
+    <div >
+      <div className="navigating-bar">
+        <div>
+          <NavLink exact activeClassName="active-link" to='/'>Home</NavLink>
+          <NavLink activeClassName="active-link" to='/about'>About</NavLink>
+          <NavLink activeClassName="active-link" to='project'>Projects</NavLink>
+        </div>
+      </div>
+      <div className="logo-bar">
+        <h1>Codefolio!</h1>
+      </div>
     </div>
   );
 }
+
+// <AppBar position="static">
+// <Toolbar>
+//   <IconButton
+//     edge="start"
+//     className={classes.menuButton}
+//     color="inherit"
+//     aria-label="menu"
+//     onClick={() => {
+//       console.log("hey!");
+//     }}
+//   >
+//     <MenuIcon />
+//   </IconButton>
+//   <Typography variant="h6" className={classes.title}>
+//     Photos
+//   </Typography>
+//   {loginLogoutControls && (
+//     <div>
+//       <IconButton
+//         aria-label="account of current user"
+//         aria-controls="menu-appbar"
+//         aria-haspopup="true"
+//         onClick={handleMenu}
+//         color="inherit"
+//       >
+//         <AccountCircle />
+//       </IconButton>
+//       <Menu
+//         id="menu-appbar"
+//         anchorEl={anchorEl}
+//         anchorOrigin={{
+//           vertical: "top",
+//           horizontal: "right",
+//         }}
+//         keepMounted
+//         transformOrigin={{
+//           vertical: "top",
+//           horizontal: "right",
+//         }}
+//         open={open}
+//         onClose={handleClose}
+//       >
+//         <MenuItem onClick={handleClose}>Profile</MenuItem>
+//         <MenuItem onClick={handleClose}>My account</MenuItem>
+//       </Menu>
+//     </div>
+//   )}
+// </Toolbar>
+// </AppBar>

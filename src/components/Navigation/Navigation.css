@@ -1,0 +1,28 @@
+.navigating-bar{
+    height: 80px;
+    background-color: rgb(38, 80, 216);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+.logo-bar{
+    height: 120px;
+    border: 1px solid rgb(83, 82, 82);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+}
+.navigating-bar a{
+    color: #fff;
+    margin: 0 10px;
+}
+.navigating-bar a:hover{
+    color: #fff;
+}
+
+.active-link{
+    font-size: 20px;
+    text-decoration-line: underline;
+}
