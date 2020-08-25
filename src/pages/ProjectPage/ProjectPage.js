@@ -20,9 +20,6 @@ export default function ProfilePage() {
 
   const projectViewed = useSelector(selectProjectViewed);
 
-  console.log(projectViewed);
-  const projects = [1, 2, 3, 4];
-
   return !projectViewed ? (
     <Loading />
   ) : (
