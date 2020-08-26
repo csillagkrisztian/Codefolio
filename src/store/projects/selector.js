@@ -7,4 +7,6 @@ export const selectProjectViewed = (state) => {
   return state.projects.postViewed;
 };
 
+export const selectProjectToBeResources = (state) =>
+  state.projects.projectToBe.resources;
 
