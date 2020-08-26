@@ -24,14 +24,15 @@ export default function Navigation() {
           <NavLink exact activeClassName="active-link" to="/">
             Home
           </NavLink>
+          <NavLink activeClassName="active-link" to="/post">
+            New Post
+          </NavLink>
           <NavLink activeClassName="active-link" to="/aboutus">
             About
           </NavLink>
-          <NavLink activeClassName="active-link" to="/post">
-            Create a Post
-          </NavLink>
+
+          {loginLogoutControls}
         </div>
-        {loginLogoutControls}
       </div>
       <div className="logo-bar">
         <h1>Codefolio!</h1>
