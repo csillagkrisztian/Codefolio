@@ -1,7 +1,9 @@
 const initialState = {
+
   loading: true,
   posts: [],
   postViewed: null,
+  searchPost: [],
   projectToBe: { resources: [] },
 };
 
@@ -16,6 +18,7 @@ export default function postsReducer(state = initialState, action) {
         postViewed: action.payload,
       };
     }
+
     case "ADD_RESOURCE": {
       return {
         ...state,
@@ -25,15 +28,32 @@ export default function postsReducer(state = initialState, action) {
         },
       };
     }
-    case "storePosts": {
-      return {
-        ...state,
-        loading: false,
-        posts: [...action.payload],
-      };
+    
+
+        case "storePosts": {
+            return {
+                ...state,
+                loading: false,
+                posts: [...action.payload]
+            }
+        }
+        case "searchedPost": {
+            return {
+                ...state,
+                searchPost: [...action.payload]
+            }
+        }
+        case "emptySearch": {
+            return {
+                ...state,
+                searchPost: [],
+            }
+        }
+        default: {
+            return state
+        }
+
     }
-    default: {
-      return state;
-    }
-  }
 }
+
+

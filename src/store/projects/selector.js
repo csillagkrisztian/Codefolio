@@ -1,4 +1,6 @@
-export const posts = (state) => state.projects.posts;
+
+export const projects = state => state.projects.posts;
+export const searchResults = state => state.projects.searchPost;
 
 export const selectProjectViewed = (state) => {
   console.log(state.projects);
@@ -7,3 +9,4 @@ export const selectProjectViewed = (state) => {
 
 export const selectProjectToBeResources = (state) =>
   state.projects.projectToBe.resources;
+

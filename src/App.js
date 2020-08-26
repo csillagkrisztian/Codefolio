@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 
 import { Switch, Route } from "react-router-dom";
@@ -17,9 +17,14 @@ import ProjectPage from "./pages/ProjectPage/ProjectPage";
 import HomePage from "./pages/HomePage/HomePage";
 import AboutPage from "./pages/AboutPage/AboutPage";
 import PostPage from "./pages/PostPage/PostPage";
+import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
+import { Drawer } from '@material-ui/core';
+
 
 function App() {
   const dispatch = useDispatch();
+  const [open, set_open] = useState(false);
+  const toggleDrawer = () => set_open(!open);
   const isLoading = useSelector(selectAppLoading);
 
   useEffect(() => {
@@ -28,6 +33,11 @@ function App() {
 
   return (
     <div className="App">
+      <ChatBubbleOutlineIcon fontSize="large" onClick={toggleDrawer} className="chat-btn" />
+      <Drawer anchor='right' open={open} onClose={toggleDrawer}>
+        <h1>Here goes the chat!</h1>
+        {/*list(anchor)*/}
+      </Drawer>
       <Navigation />
       <MessageBox />
       {isLoading ? <Loading /> : null}
