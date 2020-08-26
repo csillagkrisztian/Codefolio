@@ -1,11 +1,19 @@
 const initialState = {
+
     loading: true,
     posts: [],
-    searchPost: []
+    searchPost: [],
+    postViewed: null,
 }
 
 export default function postsReducer(state = initialState, action) {
     switch (action.type) {
+           case "ADD_PROJECT": {
+      return {
+        ...state,
+        postViewed: action.payload,
+      };
+    }
         case "storePosts": {
             return {
                 ...state,
@@ -30,3 +38,5 @@ export default function postsReducer(state = initialState, action) {
         }
     }
 }
+
+

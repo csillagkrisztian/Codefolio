@@ -1,21 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchPosts, searchPost, emptySearch } from '../../store/projects/action';
-import { posts, searchResults } from '../../store/projects/selector';
-import './HomePage.css';
+
 
 import { Paper, Drawer, Button, Icon } from "@material-ui/core";
 import SearchBar from "material-ui-search-bar";
 
 
-
-
-
-
-
 export default function HomePage() {
   const dispatch = useDispatch();
   const allPosts = useSelector(posts);
+
   const searchedPosts = useSelector(searchResults);
   const [projectAray, set_projectArray] = useState(allPosts);
   const [searchText, set_searchText] = useState('');
@@ -23,11 +16,10 @@ export default function HomePage() {
 
 
 
-  useEffect(
-    function () {
-      dispatch(fetchPosts);
-    }, []
-  )
+  useEffect(function () {
+    dispatch(fetchPosts);
+  }, []);
+
 
 
 
@@ -81,6 +73,8 @@ export default function HomePage() {
         </div>
           : <h1>Loading</h1>}
       </div>
+
+
     </div>
   );
 }
