@@ -28,7 +28,7 @@ export default function Navigation() {
             About
           </NavLink>
           <NavLink activeClassName="active-link" to="/post">
-            Create a New Project
+            Create a Post
           </NavLink>
         </div>
         {loginLogoutControls}
