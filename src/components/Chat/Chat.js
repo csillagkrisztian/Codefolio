@@ -4,13 +4,15 @@ import TextField from "@material-ui/core/TextField";
 import { apiUrl } from "../../config/constants";
 import { selectUser } from "../../store/user/selectors";
 import { useSelector } from "react-redux";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import { Button } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 const socket = io.connect(apiUrl);
 
-export default function Chat() {
+export default function Chat(props) {
   const user = useSelector(selectUser);
-  const [state, setState] = useState({ message: "", name: "" });
-  const [chat, setChat] = useState([]);
+  const { chat, setChat, state, setState } = props;
 
   const onTextChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
@@ -42,12 +44,22 @@ export default function Chat() {
       </div>
     ));
   };
-  console.log(chat);
 
-  return (
+  return !user.token ? (
+    <div>
+      <p>
+        <AccountCircleIcon />
+        You need to be logged in to chat!
+      </p>
+      <Link to={"/login"}>
+        <Button>Log in</Button>
+      </Link>
+    </div>
+  ) : (
     <div className="chat">
       <form onSubmit={onMessageSubmit}>
-        <h1>Chat</h1>
+        <h2 style={{ margin: "2rem" }}>Welcome to the chat {user.name}!</h2>
+        <div style={{ width: "auto" }}>{renderChat()}</div>
         <div>
           <TextField
             name="message"
@@ -60,10 +72,6 @@ export default function Chat() {
         </div>
         <button>Send Message</button>
       </form>
-      <div>
-        <h1>Chat log</h1>
-        {renderChat()}
-      </div>
     </div>
   );
 }
