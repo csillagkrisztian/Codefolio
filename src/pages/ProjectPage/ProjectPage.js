@@ -80,19 +80,18 @@ export default function ProfilePage() {
             <Typography>{projectViewed.project.projectDes}</Typography>
 
             <Grid item xs>
-              <Carousel className="carousel" autoPlay={false}>
-                {projectViewed.project.resources.map(
-                  ({ projectImg, projectDes }, id) => {
-                    return (
-                      <Item
-                        key={id + 1}
-                        projectImg={projectImg}
-                        description={projectDes}
-                      />
-                    );
-                  }
-                )}
-              </Carousel>
+              <Carousel autoPlay={false}></Carousel>
+              {projectViewed.project.resources.map(
+                ({ projectImg, projectDes }, id) => {
+                  return (
+                    <Item
+                      key={id + 1}
+                      projectImg={projectImg}
+                      description={projectDes}
+                    />
+                  );
+                }
+              )}
             </Grid>
           </Grid>
         </Grid>
