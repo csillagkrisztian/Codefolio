@@ -26,6 +26,8 @@ function App() {
   const [open, set_open] = useState(false);
   const toggleDrawer = () => set_open(!open);
   const isLoading = useSelector(selectAppLoading);
+  const [state, setState] = useState({ message: "", name: "" });
+  const [chat, setChat] = useState([]);
 
   useEffect(() => {
     dispatch(getUserWithStoredToken());
@@ -39,7 +41,7 @@ function App() {
         className="chat-btn"
       />
       <Drawer anchor="right" open={open} onClose={toggleDrawer}>
-        <Chat />
+        <Chat state={state} setState={setState} chat={chat} setChat={setChat} />
       </Drawer>
       <Navigation />
       <MessageBox />
