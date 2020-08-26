@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import "./Chat.css";
 
 const socket = io.connect(apiUrl);
 
@@ -59,7 +60,7 @@ export default function Chat(props) {
     <div className="chat">
       <form onSubmit={onMessageSubmit}>
         <h2 style={{ margin: "2rem" }}>Welcome to the chat {user.name}!</h2>
-        <div style={{ width: "auto" }}>{renderChat()}</div>
+        <div className="render-chat">{renderChat()}</div>
         <div>
           <TextField
             name="message"
