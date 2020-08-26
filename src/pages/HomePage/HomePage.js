@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPosts, searchPost, emptySearch } from '../../store/posts/action';
-import { posts, searchResults } from '../../store/posts/selector';
+import { fetchPosts, searchPost, emptySearch } from '../../store/projects/action';
+import { posts, searchResults } from '../../store/projects/selector';
 import './HomePage.css';
 
 import { Paper, Drawer, Button, Icon } from "@material-ui/core";
