@@ -1,6 +1,7 @@
 import { apiUrl } from "../../config/constants";
 import axios from "axios";
-import { appLoading, appDoneLoading } from "../appState/actions";
+import { appLoading, appDoneLoading, setMessage } from "../appState/actions";
+import { selectToken } from "../user/selectors";
 
 function storePosts(posts) {
   return {
@@ -50,4 +51,64 @@ export const addProject = (data) => {
 
 export const addResource = (data) => {
   return { type: "ADD_RESOURCE", payload: data };
+};
+
+export const postNewProject = ({
+  projectName,
+  feLink,
+  beLink,
+  projectImg,
+  ytUrl,
+  projectDesc,
+  resources,
+  tags,
+}) => {
+  return async (dispatch, getState) => {
+    // get token from the state
+    const token = selectToken(getState());
+
+    // if we have no token, stop
+    if (token === null) return;
+
+    dispatch(appLoading());
+    try {
+      // if we do have a token,
+      // check wether it is still valid or if it is expired
+      const response = await axios.post(
+        `${apiUrl}/newproject`,
+        {
+          projectName,
+          feLink,
+          beLink,
+          projectImg,
+          ytUrl,
+          projectDesc,
+          resources,
+          tags,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      // token is still valid
+      dispatch(setMessage("success", true, "Project successfully created!"));
+      dispatch(deleteProjectToBe());
+      dispatch(appDoneLoading());
+      console.log(response.data);
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.message);
+      } else {
+        console.log(error);
+      }
+      // if we get a 4xx or 5xx response,
+      // get rid of the token by logging out
+      dispatch(appDoneLoading());
+    }
+  };
+};
+
+const deleteProjectToBe = {
+  type: "DELETE_RESOURCES",
 };

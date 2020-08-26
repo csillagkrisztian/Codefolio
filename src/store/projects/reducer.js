@@ -7,6 +7,9 @@ const initialState = {
 
 export default function postsReducer(state = initialState, action) {
   switch (action.type) {
+    case "DELETE RESOURCES": {
+      return { ...state, projectToBe: initialState.projectToBe };
+    }
     case "ADD_PROJECT": {
       return {
         ...state,
