@@ -48,7 +48,7 @@ export default function PostPage() {
 
   const tagsArray = tags.split(/[\s,]+/);
   const tagsArrayObjects = tagsArray.map((tag) => {
-    return { tagName: tag };
+    return { tagName: tag.toLowerCase() };
   });
   console.log(tagsArrayObjects);
 
