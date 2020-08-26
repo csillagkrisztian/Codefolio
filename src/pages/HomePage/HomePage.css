@@ -8,3 +8,18 @@
     bottom: 0;
     right: 10px;
 }
+
+.project-post{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    height: 300px;
+    margin: 15px 0;
+}
+
+.project-post div{
+    padding: 20px;
+}
+.post-img{
+   background-size: cover;
+   background-position: center;
+}

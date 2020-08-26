@@ -1,6 +1,7 @@
 const initialState = {
     loading: true,
-    posts: []
+    posts: [],
+    searchPost: []
 }
 
 export default function postsReducer(state = initialState, action) {
@@ -10,6 +11,18 @@ export default function postsReducer(state = initialState, action) {
                 ...state,
                 loading: false,
                 posts: [...action.payload]
+            }
+        }
+        case "searchedPost": {
+            return {
+                ...state,
+                searchPost: [...action.payload]
+            }
+        }
+        case "emptySearch": {
+            return {
+                ...state,
+                searchPost: [],
             }
         }
         default: {

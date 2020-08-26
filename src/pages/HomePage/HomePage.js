@@ -1,50 +1,28 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPosts } from '../../store/posts/action';
-import { posts } from '../../store/posts/selector';
+import { fetchPosts, searchPost, emptySearch } from '../../store/posts/action';
+import { posts, searchResults } from '../../store/posts/selector';
+import './HomePage.css';
 
-import Grid from "@material-ui/core/Grid";
-import { makeStyles } from "@material-ui/core/styles";
 import { Paper, Drawer, Button, Icon } from "@material-ui/core";
 import SearchBar from "material-ui-search-bar";
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
-import './HomePage.css';
 
 
 
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  title: {
-    textAlign: "center",
-  },
-  postImage: {
-    height: "13rem",
-    width: "100%",
-    objectFit: "cover",
-  },
-  list: {
-    width: 250,
-
-  },
-  fullList: {
-    width: 'auto'
-  }
-}));
 
 
 
 export default function HomePage() {
   const dispatch = useDispatch();
   const allPosts = useSelector(posts);
+  const searchedPosts = useSelector(searchResults);
   const [open, set_open] = useState(false);
+  const [projectAray, set_projectArray] = useState(allPosts);
   const [searchText, set_searchText] = useState('');
-  const classes = useStyles();
   const toggleDrawer = () => set_open(!open);
 
-  console.log(allPosts);
 
 
   useEffect(
@@ -53,55 +31,60 @@ export default function HomePage() {
     }, []
   )
 
-  console.log(searchText);
 
+
+
+
+
+  function searchProjects(e) {
+    set_searchText(e);
+    if (e === "") {
+      dispatch(emptySearch);
+    }
+    const newData = allPosts.filter(function (a) {
+      return a.tags.find(tag => tag.tagName === e);
+    });
+    if (newData.length > 0) {
+      console.log(newData);
+      dispatch(searchPost(newData));
+    }
+
+  }
+  console.log(searchedPosts);
+
+
+  function Projects(props) {
+    return <Paper className="project-post" >
+      <div style={{ backgroundImage: `url(${props.img})` }} className="post-img">
+      </div>
+      <div>
+        <h3>{props.title}</h3>
+      </div>
+      <div>
+        <p>{props.text}</p>
+      </div>
+    </Paper>
+  }
 
   return (
-    <div className={classes.root}>
+    <div >
 
       <Drawer anchor='right' open={open} onClose={toggleDrawer}>
         <h1>Here goes the chat!</h1>
         {/*list(anchor)*/}
       </Drawer>
-      <ChatBubbleOutlineIcon onClick={toggleDrawer} className="chat-btn" />
-      <Button onClick={toggleDrawer}>Open Chat</Button>
+      <div className="container">
+        <ChatBubbleOutlineIcon onClick={toggleDrawer} className="chat-btn" />
+        <Button onClick={toggleDrawer}>Open Chat</Button>
 
-      <SearchBar value={searchText} onChange={e => set_searchText(e)} className="search-bar" />
+        <SearchBar value={searchText} onChange={searchProjects} className="search-bar" />
 
-      <Grid container justify="center" spacing={3}>
-
-        <Grid item xs={10}>
-
-        </Grid>
-        {!allPosts.length > 0 ? <h1>Loading...</h1> : allPosts.map((project, id) => {
-          return (
-            <Grid item xs={10} key={id + 1}>
-              <Paper>
-                <Grid
-                  container
-                  direction="row"
-                  justify="center"
-                  alignItems="center"
-                  spacing={3}
-                >
-                  <Grid item xs={4}>
-                    <img
-                      className={classes.postImage}
-                      src={project.projectImg}
-                    ></img>
-                  </Grid>
-                  <Grid item xs={3}>
-                    <h2 className={classes.title}>{project.projectName}</h2>
-                  </Grid>
-                  <Grid item xs={5}>
-                    {project.projectDesc}
-                  </Grid>
-                </Grid>
-              </Paper>
-            </Grid>
-          );
-        })}
-      </Grid>
+        {allPosts.length > 0 ? <div>
+          {!searchText ? allPosts.map((project, id) => <Projects key={id} img={project.projectImg} title={project.projectName} text={project.projectDesc} />) : searchedPosts.map((project, id) => <Projects key={id} img={project.projectImg} title={project.projectName} text={project.projectDesc} />
+          )}
+        </div>
+          : <h1>Loading</h1>}
+      </div>
     </div>
   );
 }
