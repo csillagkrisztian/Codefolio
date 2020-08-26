@@ -6,3 +6,9 @@
     width: 80%;
     margin: 0 auto;
 }
+.chat-btn{
+    font-size: 35px;
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+}

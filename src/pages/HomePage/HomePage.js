@@ -6,7 +6,6 @@ import './HomePage.css';
 
 import { Paper, Drawer, Button, Icon } from "@material-ui/core";
 import SearchBar from "material-ui-search-bar";
-import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 
 
 
@@ -18,10 +17,9 @@ export default function HomePage() {
   const dispatch = useDispatch();
   const allPosts = useSelector(posts);
   const searchedPosts = useSelector(searchResults);
-  const [open, set_open] = useState(false);
   const [projectAray, set_projectArray] = useState(allPosts);
   const [searchText, set_searchText] = useState('');
-  const toggleDrawer = () => set_open(!open);
+
 
 
 
@@ -34,10 +32,13 @@ export default function HomePage() {
 
 
 
-
+  function deleteText() {
+    set_searchText("");
+    dispatch(emptySearch);
+  }
 
   function searchProjects(e) {
-    set_searchText(e);
+    set_searchText(e.toLowerCase());
     if (e === "") {
       dispatch(emptySearch);
     }
@@ -69,15 +70,10 @@ export default function HomePage() {
   return (
     <div >
 
-      <Drawer anchor='right' open={open} onClose={toggleDrawer}>
-        <h1>Here goes the chat!</h1>
-        {/*list(anchor)*/}
-      </Drawer>
-      <div className="container">
-        <ChatBubbleOutlineIcon onClick={toggleDrawer} className="chat-btn" />
-        <Button onClick={toggleDrawer}>Open Chat</Button>
 
-        <SearchBar value={searchText} onChange={searchProjects} className="search-bar" />
+      <div className="container">
+
+        <SearchBar onCancelSearch={deleteText} value={searchText} onChange={searchProjects} className="search-bar" />
 
         {allPosts.length > 0 ? <div>
           {!searchText ? allPosts.map((project, id) => <Projects key={id} img={project.projectImg} title={project.projectName} text={project.projectDesc} />) : searchedPosts.map((project, id) => <Projects key={id} img={project.projectImg} title={project.projectName} text={project.projectDesc} />
