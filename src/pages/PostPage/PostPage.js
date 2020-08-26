@@ -47,6 +47,10 @@ export default function PostPage() {
   ]);
 
   const tagsArray = tags.split(/[\s,]+/);
+  const tagsArrayObjects = tagsArray.map((tag) => {
+    return { tagName: tag };
+  });
+  console.log(tagsArrayObjects);
 
   const clickHandler = () => {
     dispatch(
@@ -58,7 +62,7 @@ export default function PostPage() {
         ytUrl: youtubeUrl,
         projectDesc: description,
         resources,
-        tags: tagsArray,
+        tags: tagsArrayObjects,
       })
     );
     dispatch(deleteProjectToBe);
