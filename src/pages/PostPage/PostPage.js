@@ -5,7 +5,7 @@ import Carousel from "react-material-ui-carousel";
 import ResourceForm from "../../components/ResourceForm";
 import { useSelector, useDispatch } from "react-redux";
 import { selectProjectToBeResources } from "../../store/projects/selector";
-import { postNewProject } from "../../store/projects/action";
+import { postNewProject, deleteProjectToBe } from "../../store/projects/action";
 import Item from "../../components/CarouselItem/CarouselItem";
 import ResourcePicture from "../../components/ResourcePicture";
 
@@ -61,6 +61,7 @@ export default function PostPage() {
         tags: tagsArray,
       })
     );
+    dispatch(deleteProjectToBe);
     setName("");
     setFeRepo("");
     setBeRepo("");

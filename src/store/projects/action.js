@@ -1,16 +1,13 @@
-
 import { apiUrl } from "../../config/constants";
 import axios from "axios";
 import { appLoading, appDoneLoading, setMessage } from "../appState/actions";
 import { selectToken } from "../user/selectors";
 
-
-
 function storePosts(posts) {
   return {
     type: "storePosts",
-    payload: posts
-  }
+    payload: posts,
+  };
 }
 
 export const fetchPosts = async (dispatch, getState) => {
@@ -20,19 +17,20 @@ export const fetchPosts = async (dispatch, getState) => {
   } catch (e) {
     console.log(e);
   }
-}
+};
 
 export const searchPost = (post) => async (dispatch, getState) => {
   console.log("in thunkk");
   console.log(post);
   const storing = {
     type: "searchedPost",
-    payload: post
-  }
+    payload: post,
+  };
   dispatch(storing);
-}
+};
 
-export const emptySearch = async (dispatch) => dispatch({ type: "emptySearch" });
+export const emptySearch = async (dispatch) =>
+  dispatch({ type: "emptySearch" });
 
 export const getProject = (id) => {
   return async (dispatch, getState) => {
@@ -108,7 +106,7 @@ export const postNewProject = ({
 
       // token is still valid
       dispatch(setMessage("success", true, "Project successfully created!"));
-      dispatch(deleteProjectToBe());
+
       dispatch(appDoneLoading());
       console.log(response.data);
     } catch (error) {
@@ -124,7 +122,6 @@ export const postNewProject = ({
   };
 };
 
-const deleteProjectToBe = {
+export const deleteProjectToBe = {
   type: "DELETE_RESOURCES",
 };
-

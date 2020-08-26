@@ -17,9 +17,9 @@ import ProjectPage from "./pages/ProjectPage/ProjectPage";
 import HomePage from "./pages/HomePage/HomePage";
 import AboutPage from "./pages/AboutPage/AboutPage";
 import PostPage from "./pages/PostPage/PostPage";
-import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
-import { Drawer } from '@material-ui/core';
-
+import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
+import { Drawer } from "@material-ui/core";
+import Chat from "./components/Chat/Chat";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,10 +33,13 @@ function App() {
 
   return (
     <div className="App">
-      <ChatBubbleOutlineIcon fontSize="large" onClick={toggleDrawer} className="chat-btn" />
-      <Drawer anchor='right' open={open} onClose={toggleDrawer}>
-        <h1>Here goes the chat!</h1>
-        {/*list(anchor)*/}
+      <ChatBubbleOutlineIcon
+        fontSize="large"
+        onClick={toggleDrawer}
+        className="chat-btn"
+      />
+      <Drawer anchor="right" open={open} onClose={toggleDrawer}>
+        <Chat />
       </Drawer>
       <Navigation />
       <MessageBox />
