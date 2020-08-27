@@ -1,19 +1,23 @@
-
-.chat{
-    height: 80%;
-    position: relative;
-    width: 300px;
-    padding: 20px;
+.chat {
+  height: 95vh;
+  width: 330px;
+  background-color: rgba(158, 100, 238, 0.71);
+  padding: 20px;
+  background-image: url("https://cutewallpaper.org/21/whatsapp-wallpaper-for-chat/Whatsapp-Wallpaper-Hd-Free-Download-Iphone-6-Wallpaper-.jpg");
+  background-blend-mode: color;
+  z-index: 9;
+  position: absolute;
 }
-.chat-form{
-position: absolute;
-bottom: 10px;
+.chat-form {
+  position: absolute;
+  width: 290px;
+  bottom: 137px;
 }
 
 .render-chat {
+  height: 48vh;
   max-width: 350px;
   border-radius: 5px;
   padding: 20px;
   box-shadow: 0px 3px 24px -8px rgba(0, 0, 0, 0.75);
 }
-

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Grid, Button, Paper } from "@material-ui/core";
 import { Form } from "react-bootstrap";
+import LockIcon from "@material-ui/icons/Lock";
 import Carousel from "react-material-ui-carousel";
 import ResourceForm from "../../components/ResourceForm";
 import { useSelector, useDispatch } from "react-redux";
@@ -9,11 +10,11 @@ import { postNewProject, deleteProjectToBe } from "../../store/projects/action";
 import Item from "../../components/CarouselItem/CarouselItem";
 import ResourcePicture from "../../components/ResourcePicture";
 
-import './PostPage.css';
+import "./PostPage.css";
 
 import axios from "axios";
 import CarouselComponent from "../../components/CarouselItem/CarouselItem";
-
+import { selectUser } from "../../store/user/selectors";
 
 export default function PostPage() {
   const [name, setName] = useState("");
@@ -28,6 +29,7 @@ export default function PostPage() {
   const [valid, setValid] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const user = useSelector(selectUser);
   const resources = useSelector(selectProjectToBeResources);
   const dispatch = useDispatch();
 
@@ -102,7 +104,11 @@ export default function PostPage() {
     setYoutubeUrl("");
   };
 
-  return (
+  return !user.token ? (
+    <h3 style={{ textAlign: "center", marginTop: "40vh" }}>
+      Please log in to post a new project <LockIcon />
+    </h3>
+  ) : (
     <div className="post-page">
       <Grid
         container
@@ -111,8 +117,9 @@ export default function PostPage() {
         alignItems="center"
         spacing={3}
       >
-        <Grid item xs={8}>
+        <Grid style={{ marginBottom: "8rem" }} item xs={4}>
           <Form style={{ margin: "3rem" }}>
+            <h1>Project</h1>
             <Form.Group>
               <Form.Label>Project Name</Form.Label>
               <Form.Control
@@ -170,7 +177,7 @@ export default function PostPage() {
                   setDescription(e.target.value);
                 }}
                 as="textarea"
-                rows="5"
+                rows="3"
               ></Form.Control>
             </Form.Group>
             <Form.Group>
@@ -187,25 +194,39 @@ export default function PostPage() {
             {valid ? (
               <Button onClick={() => clickHandler()}>Submit</Button>
             ) : (
-
               <p>
                 Fill in the form completely and please add at least 2 resources
               </p>
             )}
-
           </Form>
         </Grid>
-        <Grid item container direction="row">
-          <Grid item xs={4}>
-            <ResourceForm />
+
+        <Grid
+          item
+          container
+          style={{ marginBottom: "10rem" }}
+          direction="row"
+          justify="center"
+          alignItems="center"
+          xs={8}
+        >
+          <ResourceForm />
+          <Grid item xs>
+            {resources.length > 0 ? (
+              <h3 style={{ textAlign: "center" }}>Resources:</h3>
+            ) : (
+              <h3 style={{ marginLeft: "4rem" }}>
+                The added resources will show up here
+              </h3>
+            )}
+            <CarouselComponent
+              array={resources}
+              name="title"
+              description="resourceDes"
+              linkName="link"
+              image="resourceImg"
+            />
           </Grid>
-          <CarouselComponent
-            array={resources}
-            name="title"
-            description="resourceDes"
-            linkName="link"
-            image="resourceImg"
-          />
         </Grid>
       </Grid>
     </div>

@@ -48,6 +48,7 @@ export default function ProfilePage() {
           <br />
           <h1>{user.name}</h1>
           <img className="profile-main-image" src={user.userImg}></img>
+          <Typography style={{ margin: "1rem" }}>{user.motto}</Typography>
           <Typography>
             <GitHubIcon />
             <a href={user.githubLink}>GitHub</a>

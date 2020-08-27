@@ -59,10 +59,12 @@ export default function ProfilePage() {
             <br />
             <Typography>Posted by:</Typography>
             <h2>{projectViewed.user.name}</h2>
-            <img
-              className="profileimage"
-              src={projectViewed.user.userImg}
-            ></img>
+            <Link to={`/profile/${projectViewed.user.id}`}>
+              <img
+                className="profileimage"
+                src={projectViewed.user.userImg}
+              ></img>
+            </Link>
 
             <Typography>
               <GitHubIcon />
@@ -85,7 +87,6 @@ export default function ProfilePage() {
               <YouTubeIcon />
               <a href={projectViewed.project.ytUrl}>Youtube Link</a>
             </Typography>
-
           </Grid>
           <Grid
             item
@@ -123,12 +124,22 @@ export default function ProfilePage() {
               )}
 
               {projectViewed.project.comments.length}
-              <Button onClick={commentClick}>
-                <CommentIcon color="secondary" fontSize="large" />
-              </Button>
+              {!user.token ? (
+                <Button
+                  onClick={() => {
+                    alert("You are not logged in!");
+                  }}
+                >
+                  <CommentIcon color="secondary" fontSize="large" />
+                </Button>
+              ) : (
+                <Button onClick={commentClick}>
+                  <CommentIcon color="secondary" fontSize="large" />
+                </Button>
+              )}
             </div>
             <Typography>{projectViewed.project.projectDesc}</Typography>
-                 {comments}
+            {comments}
 
             <CarouselComponent
               array={projectViewed.project.resources}
@@ -137,9 +148,6 @@ export default function ProfilePage() {
               linkName="link"
               image="resourceImg"
             />
-
-         
-
           </Grid>
         </Grid>
       </Grid>
