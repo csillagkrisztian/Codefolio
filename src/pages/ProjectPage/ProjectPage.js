@@ -1,24 +1,39 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Grid, Typography, Chip } from "@material-ui/core";
+import { Grid, Typography, Chip, Button } from "@material-ui/core";
 import "./ProjectPage.css";
 import Carousel from "react-material-ui-carousel";
 import Item from "../../components/CarouselItem/CarouselItem";
 import Loading from "../../components/Loading";
 import { useDispatch, useSelector } from "react-redux";
 import { getProject } from "../../store/projects/action";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import CommentIcon from "@material-ui/icons/Comment";
 import { selectProjectViewed } from "../../store/projects/selector";
+import { selectUser } from "../../store/user/selectors";
+import { likeClick } from "../../store/user/actions";
 
 export default function ProfilePage() {
   const { id } = useParams();
   const parsedId = parseInt(id);
   const dispatch = useDispatch();
 
+  const heartClick = () => {
+    dispatch(likeClick(parsedId));
+    dispatch(getProject(parsedId));
+  };
+
   useEffect(() => {
     dispatch(getProject(parsedId));
-  }, [dispatch, id]);
+  }, []);
 
   const projectViewed = useSelector(selectProjectViewed);
+  const user = useSelector(selectUser);
+
+  const likeCheck =
+    projectViewed &&
+    projectViewed.project.likes.find((l) => l.userId === user.id);
 
   return !projectViewed ? (
     <Loading />
@@ -77,7 +92,24 @@ export default function ProfilePage() {
               className="projectimage"
               src={projectViewed.project.projectImg}
             ></img>
-            <Typography>{projectViewed.project.projectDes}</Typography>
+            <div style={{ backgroundColor: "#fff" }}>
+              {projectViewed.project.likes.length}
+              {likeCheck ? (
+                <Button onClick={heartClick}>
+                  <FavoriteIcon color="secondary" fontSize="large" />
+                </Button>
+              ) : (
+                <Button onClick={heartClick}>
+                  <FavoriteBorderIcon color="secondary" fontSize="large" />
+                </Button>
+              )}
+
+              {projectViewed.project.comments.length}
+              <Button>
+                <CommentIcon color="secondary" fontSize="large" />
+              </Button>
+            </div>
+            <Typography>{projectViewed.project.projectDesc}</Typography>
 
             <Grid item xs>
               <Carousel autoPlay={false}></Carousel>
