@@ -45,99 +45,100 @@ export default function ProfilePage() {
   return !projectViewed ? (
     <Loading />
   ) : (
-    <div className="root">
-      <Grid container justify="center" spacing={4}>
-        <Grid item container justify="center" xs={12}>
-          <Grid item xs={3}>
-            <br />
-            <Typography>Posted by:</Typography>
-            <h2>{projectViewed.user.name}</h2>
-            <img
-              className="profileimage"
-              src={projectViewed.user.userImg}
-            ></img>
+      <div className="root">
+        <Grid container justify="center" spacing={4}>
+          <Grid item container justify="center" xs={12}>
+            <Grid item xs={3}>
+              <br />
+              <Typography>Posted by:</Typography>
+              <h2>{projectViewed.user.name}</h2>
+              <img
+                className="profileimage"
+                src={projectViewed.user.userImg}
+              ></img>
 
-            <Typography>
-              <GitHubIcon />
-              <a href={projectViewed.user.githubLink}>GitHub</a>
-            </Typography>
-            <Typography>
-              <LinkedInIcon />
-              <a href={projectViewed.user.linkedinLink}>LinkedIn</a>
-            </Typography>
+              <Typography>
+                <GitHubIcon />
+                <a href={projectViewed.user.githubLink}>GitHub</a>
+              </Typography>
+              <Typography>
+                <LinkedInIcon />
+                <a href={projectViewed.user.linkedinLink}>LinkedIn</a>
+              </Typography>
 
-            <Typography>
-              <WebIcon />
-              <a href={projectViewed.project.feLink}>Front-end repo</a>
-            </Typography>
-            <Typography>
-              <StorageIcon />
-              <a href={projectViewed.project.beLink}>Back-end repo</a>
-            </Typography>
+              <Typography>
+                <WebIcon />
+                <a href={projectViewed.project.feLink}>Front-end repo</a>
+              </Typography>
+              <Typography>
+                <StorageIcon />
+                <a href={projectViewed.project.beLink}>Back-end repo</a>
+              </Typography>
 
-          </Grid>
-          <Grid
-            item
-            container
-            justify="center"
-            alignItems="center"
-            direction="column"
-            spacing={5}
-            xs={8}
-          >
-            <Grid item xs>
-              <h1 className="title">{projectViewed.project.projectName}</h1>
             </Grid>
-            <Grid item xs>
-              {projectViewed.project.tags.map((t, id) => {
-                return (
-                  <Chip key={id + 1} variant="outlined" label={t.tagName} />
-                );
-              })}
-            </Grid>
-            <img
-              className="projectimage"
-              src={projectViewed.project.projectImg}
-            ></img>
-            <div style={{ backgroundColor: "#fff" }}>
-              {projectViewed.project.likes.length}
-              {likeCheck ? (
-                <Button onClick={heartClick}>
-                  <FavoriteIcon color="secondary" fontSize="large" />
-                </Button>
-              ) : (
-                <Button onClick={heartClick}>
-                  <FavoriteBorderIcon color="secondary" fontSize="large" />
-                </Button>
-              )}
-
-              {projectViewed.project.comments.length}
-              <Button>
-                <CommentIcon color="secondary" fontSize="large" />
-              </Button>
-            </div>
-            <Typography>{projectViewed.project.projectDesc}</Typography>
-
-
-                <Grid item xs>
-                  <Carousel autoPlay={false}></Carousel>
-                  {projectViewed.project.resources.map(
-                    ({ projectImg, projectDes }, id) => {
-                      return (
-                        <Item
-                          key={id + 1}
-                          projectImg={projectImg}
-                          description={projectDes}
-                        />
-                      );
-                    }
+            <Grid
+              item
+              container
+              justify="center"
+              alignItems="center"
+              direction="column"
+              spacing={5}
+              xs={8}
+            >
+              <Grid item xs>
+                <h1 className="title">{projectViewed.project.projectName}</h1>
+              </Grid>
+              <Grid item xs>
+                {projectViewed.project.tags.map((t, id) => {
+                  return (
+                    <Chip key={id + 1} variant="outlined" label={t.tagName} />
+                  );
+                })}
+              </Grid>
+              <img
+                className="projectimage"
+                src={projectViewed.project.projectImg}
+              ></img>
+              <div style={{ backgroundColor: "#fff" }}>
+                {projectViewed.project.likes.length}
+                {likeCheck ? (
+                  <Button onClick={heartClick}>
+                    <FavoriteIcon color="secondary" fontSize="large" />
+                  </Button>
+                ) : (
+                    <Button onClick={heartClick}>
+                      <FavoriteBorderIcon color="secondary" fontSize="large" />
+                    </Button>
                   )}
-                </Grid>
+
+                {projectViewed.project.comments.length}
+                <Button>
+                  <CommentIcon color="secondary" fontSize="large" />
+                </Button>
+              </div>
+              <Typography>{projectViewed.project.projectDesc}</Typography>
+
+
+              <Grid item xs>
+                <Carousel autoPlay={false}></Carousel>
+                {projectViewed.project.resources.map(
+                  ({ projectImg, projectDes }, id) => {
+                    return (
+                      <Item
+                        key={id + 1}
+                        projectImg={projectImg}
+                        description={projectDes}
+                      />
+                    );
+                  }
+                )}
               </Grid>
             </Grid>
           </Grid>
-        </div>
+        </Grid>
+      </div>
 
-      )}
-  </div>
+    )
 }
+
+

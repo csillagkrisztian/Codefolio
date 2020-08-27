@@ -65,7 +65,7 @@ function App() {
         </div>
 
         <div style={open ? { transform: `translateX(-200px)` } : { transform: `translateX(0px)` }} className="chat-menu">
-          <Chat />
+          <Chat state={state} setState={setState} chat={chat} setChat={setChat} />
         </div>
       </div>
 
