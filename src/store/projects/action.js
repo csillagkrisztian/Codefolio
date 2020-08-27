@@ -125,3 +125,33 @@ export const postNewProject = ({
 export const deleteProjectToBe = {
   type: "DELETE_RESOURCES",
 };
+
+//============> Adding comment
+export const postNewComment = (id, comment) => {
+  console.log("Atieh test Comment component", id, comment);
+  return async (dispatch, getState) => {
+    // get token from the state
+    const token = selectToken(getState());
+
+    // if we have no token, stop
+    if (token === null) return;
+
+    dispatch(appLoading());
+    try {
+      const response = await axios.post(
+        `${apiUrl}/projects/${id}/comment`,
+        {
+          comment,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      dispatch(setMessage("success", true, "Comment successfully created!"));
+
+      dispatch(appDoneLoading());
+      console.log(response.data);
+    } catch (error) {}
+  };
+};
