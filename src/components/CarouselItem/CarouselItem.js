@@ -10,15 +10,23 @@ export default function CarouselComponent(props) {
     return <p>What? No array?</p>;
   }
   return (
-    <Grid item container justify="center" alignItems="center" xs={9}>
+    <Grid
+      item
+      container
+      justify="center"
+      alignItems="center"
+      direction="column"
+      xs={8}
+    >
       <h3>Resources:</h3>
-      <Carousel style={{ width: "100%", margin: "2rem" }}>
+      <Carousel style={{ width: "auto", margin: "2rem" }}>
         {array.map((p, id) => {
           return (
             <Carousel.Item key={id}>
               <img
                 style={{
                   height: "420px",
+                  width: "100%",
                   overflow: "hidden",
                   objectFit: "cover",
                   opacity: "0.1",
@@ -29,7 +37,11 @@ export default function CarouselComponent(props) {
               />
               <Carousel.Caption>
                 <a href={p[`${linkName}`]}>
-                  <img className="profileimage" src={p[`${image}`]} />
+                  <img
+                    className="profileimage"
+                    style={{ width: "250px", height: "250px" }}
+                    src={p[`${image}`]}
+                  />
                   <Paper>
                     <h3>{p[`${name}`]}</h3>
                     <p>{p[`${description}`]}</p>

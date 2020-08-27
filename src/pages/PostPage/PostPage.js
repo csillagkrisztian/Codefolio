@@ -9,6 +9,7 @@ import { postNewProject, deleteProjectToBe } from "../../store/projects/action";
 import Item from "../../components/CarouselItem/CarouselItem";
 import ResourcePicture from "../../components/ResourcePicture";
 import axios from "axios";
+import CarouselComponent from "../../components/CarouselItem/CarouselItem";
 
 export default function PostPage() {
   const [name, setName] = useState("");
@@ -182,27 +183,23 @@ export default function PostPage() {
             {valid ? (
               <Button onClick={() => clickHandler()}>Submit</Button>
             ) : (
-              <p>Please add at least 2 resources</p>
+              <p>
+                Fill in the form completely and please add at least 2 resources
+              </p>
             )}
           </Form>
         </Grid>
-        <Grid item container justify="center">
+        <Grid item container direction="row">
           <Grid item xs={4}>
             <ResourceForm />
           </Grid>
-          <Grid item xs={8}>
-            <Paper style={{ margin: "3rem" }}>
-              {resources.map(({ resourceImg, title }, id) => {
-                return (
-                  <ResourcePicture
-                    key={id + 1}
-                    image={resourceImg}
-                    title={title}
-                  />
-                );
-              })}
-            </Paper>
-          </Grid>
+          <CarouselComponent
+            array={resources}
+            name="title"
+            description="resourceDes"
+            linkName="link"
+            image="resourceImg"
+          />
         </Grid>
       </Grid>
     </div>
