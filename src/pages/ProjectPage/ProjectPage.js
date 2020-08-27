@@ -1,6 +1,11 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+
+import { useParams, Link } from "react-router-dom";
+
+
+
 import { Grid, Typography, Chip, Button } from "@material-ui/core";
+
 import "./ProjectPage.css";
 import Carousel from "react-material-ui-carousel";
 import Item from "../../components/CarouselItem/CarouselItem";
@@ -48,26 +53,18 @@ export default function ProfilePage() {
               className="profileimage"
               src={projectViewed.user.userImg}
             ></img>
-            <Typography>
-              Github:
-              <br />
-              {projectViewed.user.githubLink}
-            </Typography>
-            <Typography>
-              LinkedIn:
-              <br />
-              {projectViewed.user.linkedinLink}
-            </Typography>
-            <Typography>
-              Front-end repo:
-              <br />
-              {projectViewed.project.feLink}
-            </Typography>
-            <Typography>
-              Back-end repo:
-              <br />
-              {projectViewed.project.beLink}
-            </Typography>
+            <a href={projectViewed.user.githubLink}>
+              <Typography>Github</Typography>
+            </a>
+            <a href={projectViewed.user.linkedinLink}>
+              <Typography>LinkedIn</Typography>
+            </a>
+            <a href={projectViewed.project.feLink}>
+              <Typography>Front-end repo</Typography>
+            </a>
+            <a href={projectViewed.project.beLink}>
+              <Typography>Back-end repo</Typography>
+            </a>
           </Grid>
           <Grid
             item
