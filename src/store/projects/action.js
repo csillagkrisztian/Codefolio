@@ -10,6 +10,12 @@ function storePosts(posts) {
   };
 }
 
+function storeComment(comment) {
+  return {
+    type: "storeComment",
+    payload: comment,
+  };
+}
 export const fetchPosts = async (dispatch, getState) => {
   try {
     const posts = await axios.get(`${apiUrl}/homepage`);
@@ -147,11 +153,16 @@ export const postNewComment = (id, comment) => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-
-      dispatch(setMessage("success", true, "Comment successfully created!"));
-
+      console.log("response======>", response.data);
+      dispatch(storeComment(response.data));
       dispatch(appDoneLoading());
-      console.log(response.data);
-    } catch (error) {}
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.message);
+      } else {
+        console.log(error);
+      }
+      dispatch(appDoneLoading());
+    }
   };
 };

@@ -34,6 +34,8 @@ export default function Comment(props) {
         {projectViewed.project.comments.map((com) => {
           return (
             <div>
+              <img src={com.user.userImg}></img>
+              <p>{com.user.name}</p>
               <p>{com.comment}</p>
             </div>
           );
