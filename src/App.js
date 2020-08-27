@@ -42,6 +42,7 @@ function App() {
         fontSize="large"
         onClick={toggleDrawer}
         className="chat-btn"
+        style={open ? { right: '250px', transition: 'right .4s' } : { right: "25px", transition: 'right .4s;' }}
       />
 
 
@@ -64,7 +65,7 @@ function App() {
           </Switch>
         </div>
 
-        <div style={open ? { transform: `translateX(-200px)` } : { transform: `translateX(0px)` }} className="chat-menu">
+        <div style={open ? { transform: `translateX(-240px)` } : { transform: `translateX(0px)` }} className="chat-menu">
           <Chat state={state} setState={setState} chat={chat} setChat={setChat} />
         </div>
       </div>

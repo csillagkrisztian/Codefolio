@@ -60,27 +60,36 @@ export default function HomePage() {
         <Link to={`/project/${props.id}`}>
           <Paper className="project-post">
             <div
-              style={{ backgroundImage: `url(${props.img})` }}
+              style={{ backgroundImage: `linear-gradient(#3d3d3dbf, #3d3d3dbf), url(${props.img}) ` }}
               className="post-img"
-            ></div>
-            <div>
+            >
               <h3>{props.title}</h3>
+            </div>
 
-              <div style={{ backgroundColor: "#fff" }}>
+
+
+            <div className="post-text" style={{ backgroundColor: "#fff" }}>
+              <div>
+                {props.tags && props.tags.map((t, id) => {
+                  return <Chip key={id + 1} variant="outlined" label={t.tagName} />;
+                })}
+              </div>
+
+              <p>{props.text}</p>
+              <div>
                 {props.likes && props.likes.length}
                 <FavoriteIcon color="secondary" fontSize="large" />
                 {props.comments && props.comments.length}
                 <CommentIcon color="secondary" fontSize="large" />
               </div>
+
             </div>
-            <div>
-              <p>{props.text}</p>
-            </div>
+
+
+
           </Paper>
         </Link>
-        {props.tags && props.tags.map((t, id) => {
-          return <Chip key={id + 1} variant="outlined" label={t.tagName} />;
-        })}
+
       </div>
     );
   }
@@ -88,7 +97,7 @@ export default function HomePage() {
   return (
 
     <div className="home-page">
-      <div className="container">
+      <div className="container center">
         <h3 className="center">Search projects</h3>
         <SearchBar
           onCancelSearch={deleteText}
@@ -110,6 +119,7 @@ export default function HomePage() {
                   tags={project.tags}
                   likes={project.likes}
                   comments={project.comments}
+
                 />
               ))
               : searchedPosts.map((project, id) => (

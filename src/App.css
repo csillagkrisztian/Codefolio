@@ -1,11 +1,13 @@
 .App{
     background-color: rgba(240, 248, 255, 0.527);
+    overflow: hidden;
+    height: 100vh;
+    overflow: hidden;
 }
 body{
-    height: 100%;
-    overflow: hidden;
-    box-sizing: border-box;
+    box-sizing: border-box;    
 }
+
 .container{
     width: 60%;
     margin: 0 auto;
@@ -14,14 +16,15 @@ body{
     font-size: 35px;
     position: fixed;
     bottom: 25px;
-    right: 250px;
+    right: 25px;
+   
 }
 
 .chat-menu{
     height: 100%;
-    width: 200px;
+    width: 240px;
     transition: all .4s;
-
+    overflow: hidden;
     /* transform: translateX(200px); */
  
     /* display: none; */
@@ -32,7 +35,7 @@ body{
 }
 
 .app-flex{
-    width: calc(100vw + 200px);
+    width: calc(100vw + 240px);
     height: 100vh;
     display: flex;
 }
