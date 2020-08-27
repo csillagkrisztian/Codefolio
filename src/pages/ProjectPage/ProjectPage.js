@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
+
 import { Grid, Typography, Chip, Button } from "@material-ui/core";
+
 import "./ProjectPage.css";
 import Carousel from "react-material-ui-carousel";
 import Item from "../../components/CarouselItem/CarouselItem";
@@ -71,6 +73,7 @@ export default function ProfilePage() {
               <StorageIcon />
               <a href={projectViewed.project.beLink}>Back-end repo</a>
             </Typography>
+
           </Grid>
           <Grid
             item

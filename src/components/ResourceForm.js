@@ -3,14 +3,36 @@ import { Form } from "react-bootstrap";
 import { Button, Paper } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { addResource } from "../store/projects/action";
+import axios from "axios";
 
 export default function ResourceForm(props) {
   const [name, setName] = useState("");
   const [link, setLink] = useState("");
-  const [imgUrl, setImgUrl] = useState("");
+  const [imgUrl, setImgUrl] = useState(
+    "https://as1.ftcdn.net/jpg/02/70/22/86/500_F_270228625_yujevz1E4E45qE1mJe3DyyLPZDmLv4Uj.jpg"
+  );
   const [description, setDescription] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
+
+  //=========================================>uploading Image API
+  const uploadImage = async (e) => {
+    const files = e.target.files[0];
+    const formData = new FormData();
+    formData.append("upload_preset", "bugtracker1");
+    formData.append("file", files);
+    setLoading(true);
+
+    axios
+      .post("https://api.cloudinary.com/v1_1/dsyta0pbg/image/upload", formData)
+      .then((res) => setImgUrl(res.data.url))
+      .then(setLoading(false))
+      .catch((err) => console.log(err));
+    console.log("sucee finish");
+  };
+
+  //============================================>End
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -57,17 +79,15 @@ export default function ResourceForm(props) {
             type="text"
           ></Form.Control>
         </Form.Group>
-        <Form.Group>
-          <Form.Label>Image Url</Form.Label>
-          <Form.Control
-            onChange={(e) => {
-              setImgUrl(e.target.value);
-            }}
-            required
-            value={imgUrl}
-            type="text"
-          ></Form.Control>
+        <Form.Group controlId="formBasicImageUrl">
+          <Form.Label>Image url</Form.Label>
+          <Form.Control onChange={uploadImage} type="file" required />
         </Form.Group>
+        {loading ? (
+          <h5>loading...</h5>
+        ) : (
+          <img src={imgUrl} style={{ width: "45px", height: "45px" }} />
+        )}
         <Form.Group>
           <Form.Label>Project Description</Form.Label>
           <Form.Control
