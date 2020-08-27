@@ -28,7 +28,7 @@ function App() {
     set_open(!open);
   };
   const isLoading = useSelector(selectAppLoading);
-  const [state, setState] = useState({ message: "", name: "" });
+  const [state, setState] = useState({ message: "", name: "", image: "" });
   const [chat, setChat] = useState([]);
 
   useEffect(() => {

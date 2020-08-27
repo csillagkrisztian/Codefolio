@@ -1,6 +1,7 @@
 import React from "react";
 import { Grid, Typography } from "@material-ui/core";
-import './AboutPage.css';
+import "./AboutPage.css";
+import logo from "../../images/codeFoliologo.png";
 
 export default function AboutPage() {
   return (
@@ -14,7 +15,11 @@ export default function AboutPage() {
       >
         <Grid item xs={12}>
           <h1 style={{ marginTop: "3rem", textAlign: "center" }}>
-            About .codeFolio
+            About{" "}
+            <img
+              style={{ width: "240px", height: "auto", marginBottom: "1.4rem" }}
+              src={logo}
+            ></img>
           </h1>
         </Grid>
         <Grid item container justify="center" direction="row" xs={9}>

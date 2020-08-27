@@ -204,7 +204,7 @@ export default function PostPage() {
         <Grid
           item
           container
-          style={{ marginBottom: "10rem" }}
+          style={{ marginBottom: "9rem" }}
           direction="row"
           justify="center"
           alignItems="center"
