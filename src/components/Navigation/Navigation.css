@@ -4,6 +4,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr ;
     color: #fff;
+    
 }
 .logo-bar{
     height: 120px;
@@ -30,4 +31,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+ .app-bar{
+    z-index: 1400 !important;
 }

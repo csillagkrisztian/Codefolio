@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import io from "socket.io-client";
-import TextField from "@material-ui/core/TextField";
+import { TextField, Button } from "@material-ui/core";
 import { apiUrl } from "../../config/constants";
 import { selectUser } from "../../store/user/selectors";
 import { useSelector } from "react-redux";
+
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import "./Chat.css";
+
 
 const socket = io.connect(apiUrl);
 
@@ -57,22 +58,25 @@ export default function Chat(props) {
       </Link>
     </div>
   ) : (
-    <div className="chat">
-      <form onSubmit={onMessageSubmit}>
-        <h2 style={{ margin: "2rem" }}>Welcome to the chat {user.name}!</h2>
-        <div className="render-chat">{renderChat()}</div>
-        <div>
-          <TextField
-            name="message"
-            onChange={(e) => onTextChange(e)}
-            value={state.message}
-            id="outlined-multiline-static"
-            variant="outlined"
-            lable="Message"
-          />
-        </div>
-        <button>Send Message</button>
-      </form>
-    </div>
-  );
+      <div className="chat">
+
+        <form className="chat-form" onSubmit={onMessageSubmit}>
+          <h2 style={{ margin: "2rem" }}>Welcome to the chat {user.name}!</h2>
+          <div className="render-chat">{renderChat()}</div>
+
+          <div>
+            <TextField
+              name="message"
+              onChange={(e) => onTextChange(e)}
+              value={state.message}
+              id="outlined-multiline-static"
+              variant="outlined"
+              lable="Message"
+            />
+          </div>
+          <button>Send Message</button>
+        </form>
+
+      </div>
+    );
 }

@@ -24,7 +24,10 @@ import Chat from "./components/Chat/Chat";
 function App() {
   const dispatch = useDispatch();
   const [open, set_open] = useState(false);
-  const toggleDrawer = () => set_open(!open);
+  const toggleDrawer = () => {
+    console.log('blip blop')
+    set_open(!open);
+  }
   const isLoading = useSelector(selectAppLoading);
   const [state, setState] = useState({ message: "", name: "" });
   const [chat, setChat] = useState([]);
@@ -40,22 +43,33 @@ function App() {
         onClick={toggleDrawer}
         className="chat-btn"
       />
-      <Drawer anchor="right" open={open} onClose={toggleDrawer}>
-        <Chat state={state} setState={setState} chat={chat} setChat={setChat} />
-      </Drawer>
+
+
       <Navigation />
+
       <MessageBox />
       {isLoading ? <Loading /> : null}
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route path="/project/:id" component={ProjectPage} />
-        <Route path="/profile/:id" component={ProfilePage} />
-        <Route path="/myprofile" component={MyProfilePage} />
-        <Route path="/aboutus" component={AboutPage} />
-        <Route path="/post" component={PostPage} />
-        <Route path="/signup" component={SignUp} />
-        <Route path="/login" component={Login} />
-      </Switch>
+      <div className="app-flex">
+
+        <div className="rendered-page">
+          <Switch>
+            <Route exact path="/" component={HomePage} />
+            <Route path="/project/:id" component={ProjectPage} />
+            <Route path="/profile/:id" component={ProfilePage} />
+            <Route path="/myprofile" component={MyProfilePage} />
+            <Route path="/aboutus" component={AboutPage} />
+            <Route path="/post" component={PostPage} />
+            <Route path="/signup" component={SignUp} />
+            <Route path="/login" component={Login} />
+          </Switch>
+        </div>
+
+        <div style={open ? { transform: `translateX(-200px)` } : { transform: `translateX(0px)` }} className="chat-menu">
+          <Chat state={state} setState={setState} chat={chat} setChat={setChat} />
+        </div>
+      </div>
+
+
     </div>
   );
 }

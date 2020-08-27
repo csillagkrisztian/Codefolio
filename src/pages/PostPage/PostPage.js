@@ -8,8 +8,12 @@ import { selectProjectToBeResources } from "../../store/projects/selector";
 import { postNewProject, deleteProjectToBe } from "../../store/projects/action";
 import Item from "../../components/CarouselItem/CarouselItem";
 import ResourcePicture from "../../components/ResourcePicture";
+
+import './PostPage.css';
+
 import axios from "axios";
 import CarouselComponent from "../../components/CarouselItem/CarouselItem";
+
 
 export default function PostPage() {
   const [name, setName] = useState("");
@@ -99,7 +103,7 @@ export default function PostPage() {
   };
 
   return (
-    <div>
+    <div className="post-page">
       <Grid
         container
         justify="center"
@@ -183,10 +187,12 @@ export default function PostPage() {
             {valid ? (
               <Button onClick={() => clickHandler()}>Submit</Button>
             ) : (
+
               <p>
                 Fill in the form completely and please add at least 2 resources
               </p>
             )}
+
           </Form>
         </Grid>
         <Grid item container direction="row">

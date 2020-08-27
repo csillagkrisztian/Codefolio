@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { AppBar } from '@material-ui/core';
 import { useSelector } from "react-redux";
 import { selectToken } from "../../store/user/selectors";
 import LoggedIn from "./LoggedIn";
@@ -18,11 +19,15 @@ export default function Navigation() {
   }
   return (
     <div>
+
       <div className="navigating-bar">
-        <div></div>
+        <div className="center">
+          <h2 >CodeFolio</h2>
+        </div>
         <div className="navi">
           <NavLink exact activeClassName="active-link" to="/">
             Home
+
           </NavLink>
           <NavLink activeClassName="active-link" to="/post">
             New Post
@@ -32,11 +37,10 @@ export default function Navigation() {
           </NavLink>
 
           {loginLogoutControls}
+
         </div>
       </div>
-      <div className="logo-bar">
-        <h1>Codefolio!</h1>
-      </div>
+
     </div>
   );
 }

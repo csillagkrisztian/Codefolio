@@ -1,14 +1,47 @@
 .App{
     background-color: rgba(240, 248, 255, 0.527);
 }
-
+body{
+    height: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+}
 .container{
-    width: 80%;
+    width: 60%;
     margin: 0 auto;
 }
 .chat-btn{
     font-size: 35px;
     position: fixed;
     bottom: 25px;
-    right: 25px;
+    right: 250px;
+}
+
+.chat-menu{
+    height: 100%;
+    width: 200px;
+    transition: all .4s;
+
+    /* transform: translateX(200px); */
+ 
+    /* display: none; */
+   
+    
+   background-color: #fff;
+    
+}
+
+.app-flex{
+    width: calc(100vw + 200px);
+    height: 100vh;
+    display: flex;
+}
+
+.center{
+    margin: 0 auto;
+}
+.rendered-page{
+    width: 100vw;
+    overflow-y:auto;
+    overflow-x: hidden;
 }

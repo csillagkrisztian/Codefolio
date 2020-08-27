@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 
 import { Grid, Typography, Chip, Button } from "@material-ui/core";
 
+import Comment from "../../components/Comment/Comment.js";
 import "./ProjectPage.css";
 import Carousel from "react-material-ui-carousel";
 import Item from "../../components/CarouselItem/CarouselItem";
@@ -26,10 +27,15 @@ export default function ProfilePage() {
   const { id } = useParams();
   const parsedId = parseInt(id);
   const dispatch = useDispatch();
+  const [comments, setComments] = useState(false);
 
   const heartClick = () => {
     dispatch(likeClick(parsedId));
     dispatch(getProject(parsedId));
+  };
+
+  const commentClick = () => {
+    setComments(comments ? "" : <Comment id={parsedId} />);
   };
 
   useEffect(() => {
@@ -79,6 +85,7 @@ export default function ProfilePage() {
               <YouTubeIcon />
               <a href={projectViewed.project.ytUrl}>Youtube Link</a>
             </Typography>
+
           </Grid>
           <Grid
             item
@@ -116,11 +123,12 @@ export default function ProfilePage() {
               )}
 
               {projectViewed.project.comments.length}
-              <Button>
+              <Button onClick={commentClick}>
                 <CommentIcon color="secondary" fontSize="large" />
               </Button>
             </div>
             <Typography>{projectViewed.project.projectDesc}</Typography>
+                 {comments}
 
             <CarouselComponent
               array={projectViewed.project.resources}
@@ -129,6 +137,9 @@ export default function ProfilePage() {
               linkName="link"
               image="resourceImg"
             />
+
+         
+
           </Grid>
         </Grid>
       </Grid>
