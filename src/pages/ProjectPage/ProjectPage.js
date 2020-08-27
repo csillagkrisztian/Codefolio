@@ -59,10 +59,12 @@ export default function ProfilePage() {
             <br />
             <Typography>Posted by:</Typography>
             <h2>{projectViewed.user.name}</h2>
-            <img
-              className="profileimage"
-              src={projectViewed.user.userImg}
-            ></img>
+            <Link to={`/profile/${projectViewed.user.id}`}>
+              <img
+                className="profileimage"
+                src={projectViewed.user.userImg}
+              ></img>
+            </Link>
 
             <Typography>
               <GitHubIcon />

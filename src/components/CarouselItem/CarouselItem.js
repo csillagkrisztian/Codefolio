@@ -16,6 +16,7 @@ export default function CarouselComponent(props) {
       justify="center"
       alignItems="center"
       direction="column"
+      style={{ marginBottom: "8rem" }}
       xs={12}
     >
       <Carousel style={{ width: "auto", margin: "2rem" }}>
