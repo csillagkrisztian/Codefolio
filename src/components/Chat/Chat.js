@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import io from "socket.io-client";
-import TextField from "@material-ui/core/TextField";
+import { TextField, Button } from "@material-ui/core";
 import { apiUrl } from "../../config/constants";
 import { selectUser } from "../../store/user/selectors";
 import { useSelector } from "react-redux";
+
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import "./Chat.css";
+
 
 const socket = io.connect(apiUrl);
 
@@ -58,9 +60,11 @@ export default function Chat(props) {
     </div>
   ) : (
     <div className="chat">
-      <form onSubmit={onMessageSubmit}>
+
+      <form className="chat-form" onSubmit={onMessageSubmit}>
         <h2 style={{ margin: "2rem" }}>Welcome to the chat {user.name}!</h2>
         <div className="render-chat">{renderChat()}</div>
+
         <div>
           <TextField
             name="message"
@@ -73,6 +77,7 @@ export default function Chat(props) {
         </div>
         <button>Send Message</button>
       </form>
+
     </div>
   );
 }

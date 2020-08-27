@@ -8,6 +8,7 @@ const initialState = {
 };
 
 export default function postsReducer(state = initialState, action) {
+
   switch (action.type) {
     case "DELETE RESOURCES": {
       return { ...state, projectToBe: initialState.projectToBe };
@@ -28,32 +29,32 @@ export default function postsReducer(state = initialState, action) {
         },
       };
     }
-    
 
-        case "storePosts": {
-            return {
-                ...state,
-                loading: false,
-                posts: [...action.payload]
-            }
-        }
-        case "searchedPost": {
-            return {
-                ...state,
-                searchPost: [...action.payload]
-            }
-        }
-        case "emptySearch": {
-            return {
-                ...state,
-                searchPost: [],
-            }
-        }
-        default: {
-            return state
-        }
 
+    case "storePosts": {
+      return {
+        ...state,
+        loading: false,
+        posts: [...action.payload]
+      }
     }
+    case "searchedPost": {
+      return {
+        ...state,
+        searchPost: [...action.payload]
+      }
+    }
+    case "emptySearch": {
+      return {
+        ...state,
+        searchPost: [],
+      }
+    }
+    default: {
+      return state
+    }
+
+  }
 }
 
 

@@ -8,6 +8,7 @@
     grid-template-columns: 1fr 1fr 1fr;
     height: 300px;
     margin: 15px 0;
+    width: 100%;
 }
 
 .project-post div{
@@ -16,4 +17,9 @@
 .post-img{
    background-size: cover;
    background-position: center;
+}
+.home-page{
+    height: 800px;
+    width: 100%;
+    padding: 0 30px;
 }

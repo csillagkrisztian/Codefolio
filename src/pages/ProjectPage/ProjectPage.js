@@ -41,6 +41,7 @@ export default function ProfilePage() {
     projectViewed &&
     projectViewed.project.likes.find((l) => l.userId === user.id);
 
+
   return !projectViewed ? (
     <Loading />
   ) : (
@@ -117,23 +118,26 @@ export default function ProfilePage() {
             </div>
             <Typography>{projectViewed.project.projectDesc}</Typography>
 
-            <Grid item xs>
-              <Carousel autoPlay={false}></Carousel>
-              {projectViewed.project.resources.map(
-                ({ projectImg, projectDes }, id) => {
-                  return (
-                    <Item
-                      key={id + 1}
-                      projectImg={projectImg}
-                      description={projectDes}
-                    />
-                  );
-                }
-              )}
+
+                <Grid item xs>
+                  <Carousel autoPlay={false}></Carousel>
+                  {projectViewed.project.resources.map(
+                    ({ projectImg, projectDes }, id) => {
+                      return (
+                        <Item
+                          key={id + 1}
+                          projectImg={projectImg}
+                          description={projectDes}
+                        />
+                      );
+                    }
+                  )}
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
-        </Grid>
-      </Grid>
-    </div>
-  );
+        </div>
+
+      )}
+  </div>
 }

@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import { Col } from "react-bootstrap";
 import axios from "axios";
+import './SignUp.css';
 
 export default function SignUp() {
   const [name, setName] = useState("");
@@ -56,7 +57,7 @@ export default function SignUp() {
     setImage("");
   }
 
-  return (
+  return (<div className="signup-page">
     <Container>
       <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
         <h1 className="mt-5 mb-5">Signup</h1>
@@ -122,8 +123,8 @@ export default function SignUp() {
         {loading ? (
           <h5>loading...</h5>
         ) : (
-          <img src={image} style={{ width: "45px", height: "45px" }} />
-        )}
+            <img src={image} style={{ width: "45px", height: "45px" }} />
+          )}
         <Form.Group className="mt-5">
           <Button variant="primary" type="submit" onClick={submitForm}>
             Sign up
@@ -132,5 +133,6 @@ export default function SignUp() {
         <Link to="/login">Click here to log in</Link>
       </Form>
     </Container>
+  </div>
   );
 }

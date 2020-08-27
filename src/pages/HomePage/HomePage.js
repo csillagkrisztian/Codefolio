@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
+
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import CommentIcon from "@material-ui/icons/Comment";
+
 
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -24,8 +26,10 @@ export default function HomePage() {
 
   const searchedPosts = useSelector(searchResults);
   const [projectAray, set_projectArray] = useState(allPosts);
+
   const [searchText, set_searchText] = useState("");
   console.log(allPosts);
+
 
   useEffect(function () {
     dispatch(fetchPosts);
@@ -49,7 +53,7 @@ export default function HomePage() {
       dispatch(searchPost(newData));
     }
   }
-  console.log(searchedPosts);
+
 
   function Projects(props) {
     return (
@@ -83,8 +87,10 @@ export default function HomePage() {
   }
 
   return (
-    <div>
+
+    <div className="home-page">
       <div className="container">
+<h3 className="center">Search projects</h3>
         <SearchBar
           onCancelSearch={deleteText}
           value={searchText}

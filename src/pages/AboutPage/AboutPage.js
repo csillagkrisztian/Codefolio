@@ -1,9 +1,10 @@
 import React from "react";
 import { Grid, Typography } from "@material-ui/core";
+import './AboutPage.css';
 
 export default function AboutPage() {
   return (
-    <div>
+    <div className="about-page">
       <Grid
         container
         justify="center"
