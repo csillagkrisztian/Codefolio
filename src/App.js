@@ -42,6 +42,7 @@ function App() {
         fontSize="large"
         onClick={toggleDrawer}
         className="chat-btn"
+        style={open ? { right: '250px', transition: 'right .4s' } : { right: "25px", transition: 'right .4s;' }}
       />
 
 

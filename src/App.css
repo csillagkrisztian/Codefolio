@@ -1,11 +1,13 @@
 .App{
     background-color: rgba(240, 248, 255, 0.527);
+    overflow: hidden;
+    height: 100vh;
+    overflow: hidden;
 }
 body{
-    height: 100%;
-    overflow: hidden;
-    box-sizing: border-box;
+    box-sizing: border-box;    
 }
+
 .container{
     width: 60%;
     margin: 0 auto;
@@ -14,7 +16,8 @@ body{
     font-size: 35px;
     position: fixed;
     bottom: 25px;
-    right: 250px;
+    right: 25px;
+   
 }
 
 .chat-menu{
