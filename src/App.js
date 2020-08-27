@@ -43,7 +43,7 @@ function App() {
         className="chat-btn"
         style={
           open
-            ? { right: "250px", transition: "right .4s" }
+            ? { right: "350px", transition: "right .4s" }
             : { right: "25px", transition: "right .4s;" }
         }
       />
@@ -69,8 +69,8 @@ function App() {
         <div
           style={
             open
-              ? { transform: `translateX(-240px)` }
-              : { transform: `translateX(0px)` }
+              ? { transform: `translateX(-330px)` }
+              : { transform: `translateX(100px)` }
           }
           className="chat-menu"
         >

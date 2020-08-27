@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectProjectViewed } from "../../store/projects/selector";
 import { Grid, Button, Paper } from "@material-ui/core";
 import { Form } from "react-bootstrap";
-import { postNewComment } from "../../store/projects/action";
+import { postNewComment, getProject } from "../../store/projects/action";
 
 export default function Comment(props) {
   const [comment, setComment] = useState("");
@@ -12,6 +12,7 @@ export default function Comment(props) {
 
   const clickHandler = () => {
     dispatch(postNewComment(props.id, comment));
+    dispatch(getProject(props.id));
     setComment("");
   };
   return (

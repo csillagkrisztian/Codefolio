@@ -55,7 +55,15 @@ export default function ResourceForm(props) {
   };
 
   return (
-    <Paper style={{ maxWidth: "16rem", margin: "2rem", padding: "1rem" }}>
+    <div
+      style={{
+        maxWidth: "16rem",
+        marginLeft: "4rem",
+        marginBottom: "12rem",
+        padding: "1rem",
+      }}
+    >
+      <h1 style={{ marginBottom: "1rem" }}>Resources</h1>
       <Form>
         <Form.Group>
           <Form.Label>Resource Name</Form.Label>
@@ -104,6 +112,6 @@ export default function ResourceForm(props) {
           Submit Resource
         </Button>
       </Form>
-    </Paper>
+    </div>
   );
 }

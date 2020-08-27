@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import io from "socket.io-client";
-import { TextField, Button } from "@material-ui/core";
+import { TextField, Button, Paper } from "@material-ui/core";
 import { apiUrl } from "../../config/constants";
 import { selectUser } from "../../store/user/selectors";
 import { useSelector } from "react-redux";
@@ -8,7 +8,6 @@ import { useSelector } from "react-redux";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { Link } from "react-router-dom";
 import "./Chat.css";
-
 
 const socket = io.connect(apiUrl);
 
@@ -22,8 +21,11 @@ export default function Chat(props) {
 
   const onMessageSubmit = (e) => {
     e.preventDefault();
+    if (!state) {
+      return;
+    }
     const { name, message } = state;
-    socket.emit("message", { name, message });
+    socket.emit("message", { name: user.name, message });
     setState({ message: "", name });
   };
 
@@ -40,9 +42,9 @@ export default function Chat(props) {
   const renderChat = () => {
     return chat.map(({ name, message }, index) => (
       <div key={index}>
-        <h3>
+        <p>
           {name}:<span>{message}</span>
-        </h3>
+        </p>
       </div>
     ));
   };
@@ -58,13 +60,13 @@ export default function Chat(props) {
       </Link>
     </div>
   ) : (
-      <div className="chat">
+    <div className="chat">
+      <h2 style={{ margin: "2rem", color: "white" }}>Welcome {user.name}!</h2>
+      <Paper className="render-chat">{renderChat()}</Paper>
 
-        <form className="chat-form" onSubmit={onMessageSubmit}>
-          <h2 style={{ margin: "2rem" }}>Welcome to the chat {user.name}!</h2>
-          <div className="render-chat">{renderChat()}</div>
-
-          <div>
+      <form className="chat-form" onSubmit={onMessageSubmit}>
+        <Paper>
+          <div style={{ margin: "2rem", padding: "1rem" }}>
             <TextField
               name="message"
               onChange={(e) => onTextChange(e)}
@@ -74,9 +76,17 @@ export default function Chat(props) {
               lable="Message"
             />
           </div>
-          <button>Send Message</button>
-        </form>
-
-      </div>
-    );
+          <div
+            style={{
+              justifyContent: "center",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <button>Send Message</button>
+          </div>
+        </Paper>
+      </form>
+    </div>
+  );
 }

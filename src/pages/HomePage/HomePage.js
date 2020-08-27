@@ -99,7 +99,7 @@ export default function HomePage() {
         />
 
         {allPosts.length > 0 ? (
-          <div>
+          <div style={{ marginBottom: "12rem" }}>
             {!searchText
               ? allPosts.map((project, id) => (
                   <Projects

@@ -1,50 +1,49 @@
-.App{
-    background-color: rgba(240, 248, 255, 0.527);
-    overflow: hidden;
-    height: 100vh;
-    overflow: hidden;
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap");
+.App {
+  font-family: "Roboto Slab", serif;
+  background-color: rgba(240, 248, 255, 0.527);
+  overflow: hidden;
+  height: 100vh;
+  overflow: hidden;
 }
-body{
-    box-sizing: border-box;    
-}
-
-.container{
-    width: 60%;
-    margin: 0 auto;
-}
-.chat-btn{
-    font-size: 35px;
-    position: fixed;
-    bottom: 25px;
-    right: 25px;
-   
+body {
+  box-sizing: border-box;
 }
 
-.chat-menu{
-    height: 100%;
-    width: 240px;
-    transition: all .4s;
-    overflow: hidden;
-    /* transform: translateX(200px); */
- 
-    /* display: none; */
-   
-    
-   background-color: #fff;
-    
+.container {
+  width: 60%;
+  margin: 0 auto;
+}
+.chat-btn {
+  font-size: 35px;
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
 }
 
-.app-flex{
-    width: calc(100vw + 240px);
-    height: 100vh;
-    display: flex;
+.chat-menu {
+  height: 100%;
+  width: 350px;
+  transition: all 0.4s;
+  overflow: hidden;
+  /* transform: translateX(200px); */
+
+  /* display: none; */
+
+  background-color: #fff;
 }
 
-.center{
-    margin: 0 auto;
+.app-flex {
+  width: calc(100vw + 350px);
+  height: 100vh;
+  display: flex;
 }
-.rendered-page{
-    width: 100vw;
-    overflow-y:auto;
-    overflow-x: hidden;
+
+.center {
+  margin: 0 auto;
+}
+.rendered-page {
+  width: 100vw;
+  overflow-y: auto;
+  overflow-x: hidden;
 }

@@ -16,9 +16,8 @@ export default function CarouselComponent(props) {
       justify="center"
       alignItems="center"
       direction="column"
-      xs={8}
+      xs={12}
     >
-      <h3>Resources:</h3>
       <Carousel style={{ width: "auto", margin: "2rem" }}>
         {array.map((p, id) => {
           return (
