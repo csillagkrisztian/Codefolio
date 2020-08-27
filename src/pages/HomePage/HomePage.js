@@ -68,9 +68,9 @@ export default function HomePage() {
               <h3>{props.title}</h3>
 
               <div style={{ backgroundColor: "#fff" }}>
-                {props.likes.length}
+                {props.likes && props.likes.length}
                 <FavoriteIcon color="secondary" fontSize="large" />
-                {props.comments.length}
+                {props.comments && props.comments.length}
                 <CommentIcon color="secondary" fontSize="large" />
               </div>
             </div>
@@ -79,7 +79,7 @@ export default function HomePage() {
             </div>
           </Paper>
         </Link>
-        {props.tags.map((t, id) => {
+        {props.tags && props.tags.map((t, id) => {
           return <Chip key={id + 1} variant="outlined" label={t.tagName} />;
         })}
       </div>
@@ -90,7 +90,7 @@ export default function HomePage() {
 
     <div className="home-page">
       <div className="container">
-<h3 className="center">Search projects</h3>
+        <h3 className="center">Search projects</h3>
         <SearchBar
           onCancelSearch={deleteText}
           value={searchText}
@@ -102,29 +102,29 @@ export default function HomePage() {
           <div>
             {!searchText
               ? allPosts.map((project, id) => (
-                  <Projects
-                    key={id}
-                    img={project.projectImg}
-                    title={project.projectName}
-                    text={project.projectDesc}
-                    id={project.id}
-                    tags={project.tags}
-                    likes={project.likes}
-                    comments={project.comments}
-                  />
-                ))
+                <Projects
+                  key={id}
+                  img={project.projectImg}
+                  title={project.projectName}
+                  text={project.projectDesc}
+                  id={project.id}
+                  tags={project.tags}
+                  likes={project.likes}
+                  comments={project.comments}
+                />
+              ))
               : searchedPosts.map((project, id) => (
-                  <Projects
-                    key={id}
-                    img={project.projectImg}
-                    title={project.projectName}
-                    text={project.projectDesc}
-                  />
-                ))}
+                <Projects
+                  key={id}
+                  img={project.projectImg}
+                  title={project.projectName}
+                  text={project.projectDesc}
+                />
+              ))}
           </div>
         ) : (
-          <h1>Loading</h1>
-        )}
+            <h1>Loading</h1>
+          )}
       </div>
     </div>
   );
