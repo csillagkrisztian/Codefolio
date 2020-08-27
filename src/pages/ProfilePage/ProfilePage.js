@@ -8,6 +8,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectUserViewing } from "../../store/user/selectors";
 import Loading from "../../components/Loading";
 import { getProfile } from "../../store/user/actions";
+import GitHubIcon from "@material-ui/icons/GitHub";
+import LinkedInIcon from "@material-ui/icons/LinkedIn";
 
 export default function ProfilePage() {
   const { id } = useParams();
@@ -31,14 +33,12 @@ export default function ProfilePage() {
           <h1>{user.name}</h1>
           <img className="profile-main-image" src={user.userImg}></img>
           <Typography>
-            Github:
-            <br />
-            {user.githubLink}
+            <GitHubIcon />
+            <a href={user.githubLink}>GitHub</a>
           </Typography>
           <Typography>
-            LinkedIn:
-            <br />
-            {user.linkedinLink}
+            <LinkedInIcon />
+            <a href={user.linkedinLink}>LinkedIn</a>
           </Typography>
         </Grid>
         <Grid item>
