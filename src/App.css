@@ -19,9 +19,9 @@ body{
 
 .chat-menu{
     height: 100%;
-    width: 200px;
+    width: 240px;
     transition: all .4s;
-
+    overflow: hidden;
     /* transform: translateX(200px); */
  
     /* display: none; */
@@ -32,7 +32,7 @@ body{
 }
 
 .app-flex{
-    width: calc(100vw + 200px);
+    width: calc(100vw + 240px);
     height: 100vh;
     display: flex;
 }
