@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { Grid, Typography, Chip, Button } from "@material-ui/core";
 import "./ProjectPage.css";
 import Carousel from "react-material-ui-carousel";
@@ -13,6 +13,10 @@ import CommentIcon from "@material-ui/icons/Comment";
 import { selectProjectViewed } from "../../store/projects/selector";
 import { selectUser } from "../../store/user/selectors";
 import { likeClick } from "../../store/user/actions";
+import StorageIcon from "@material-ui/icons/Storage";
+import WebIcon from "@material-ui/icons/Web";
+import GitHubIcon from "@material-ui/icons/GitHub";
+import LinkedInIcon from "@material-ui/icons/LinkedIn";
 
 export default function ProfilePage() {
   const { id } = useParams();
@@ -44,29 +48,28 @@ export default function ProfilePage() {
           <Grid item xs={3}>
             <br />
             <Typography>Posted by:</Typography>
+            <h2>{projectViewed.user.name}</h2>
             <img
               className="profileimage"
               src={projectViewed.user.userImg}
             ></img>
+
             <Typography>
-              Github:
-              <br />
-              {projectViewed.user.githubLink}
+              <GitHubIcon />
+              <a href={projectViewed.user.githubLink}>GitHub</a>
             </Typography>
             <Typography>
-              LinkedIn:
-              <br />
-              {projectViewed.user.linkedinLink}
+              <LinkedInIcon />
+              <a href={projectViewed.user.linkedinLink}>LinkedIn</a>
+            </Typography>
+
+            <Typography>
+              <WebIcon />
+              <a href={projectViewed.project.feLink}>Front-end repo</a>
             </Typography>
             <Typography>
-              Front-end repo:
-              <br />
-              {projectViewed.project.feLink}
-            </Typography>
-            <Typography>
-              Back-end repo:
-              <br />
-              {projectViewed.project.beLink}
+              <StorageIcon />
+              <a href={projectViewed.project.beLink}>Back-end repo</a>
             </Typography>
           </Grid>
           <Grid
