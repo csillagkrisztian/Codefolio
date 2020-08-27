@@ -20,6 +20,8 @@ import StorageIcon from "@material-ui/icons/Storage";
 import WebIcon from "@material-ui/icons/Web";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
+import CarouselComponent from "../../components/CarouselItem/CarouselItem";
+import YouTubeIcon from "@material-ui/icons/YouTube";
 
 export default function ProfilePage() {
   const { id } = useParams();
@@ -79,6 +81,11 @@ export default function ProfilePage() {
               <StorageIcon />
               <a href={projectViewed.project.beLink}>Back-end repo</a>
             </Typography>
+            <Typography>
+              <YouTubeIcon />
+              <a href={projectViewed.project.ytUrl}>Youtube Link</a>
+            </Typography>
+
           </Grid>
           <Grid
             item
@@ -121,21 +128,18 @@ export default function ProfilePage() {
               </Button>
             </div>
             <Typography>{projectViewed.project.projectDesc}</Typography>
-            {comments}
-            <Grid item xs>
-              <Carousel autoPlay={false}></Carousel>
-              {projectViewed.project.resources.map(
-                ({ projectImg, projectDes }, id) => {
-                  return (
-                    <Item
-                      key={id + 1}
-                      projectImg={projectImg}
-                      description={projectDes}
-                    />
-                  );
-                }
-              )}
-            </Grid>
+                 {comments}
+
+            <CarouselComponent
+              array={projectViewed.project.resources}
+              name="title"
+              description="resourceDes"
+              linkName="link"
+              image="resourceImg"
+            />
+
+         
+
           </Grid>
         </Grid>
       </Grid>

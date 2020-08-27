@@ -1,11 +1,11 @@
 import React from "react";
-import { Grid, Typography, Button } from "@material-ui/core";
-import Carousel from "react-material-ui-carousel";
-import Item from "../../components/CarouselItem/CarouselItem";
+import { Grid, Typography, Button, Paper } from "@material-ui/core";
+import { Carousel } from "react-bootstrap";
 import EditIcon from "@material-ui/icons/Edit";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../store/user/selectors";
 import Loading from "../../components/Loading";
+import ProfileCarousel from "../../components/CarouselItem/ProfileCarousel";
 
 export default function MyProfilePage() {
   const user = useSelector(selectUser);
@@ -14,7 +14,13 @@ export default function MyProfilePage() {
     <Loading />
   ) : (
     <div className="root">
-      <Grid container justify="center" spacing={3}>
+      <Grid
+        container
+        justify="center"
+        direction="column"
+        alignItems="center"
+        spacing={3}
+      >
         <Grid className="profile" item xs={6}>
           <br />
           <h1>
@@ -36,19 +42,7 @@ export default function MyProfilePage() {
             <EditIcon />
           </Typography>
         </Grid>
-        <Grid item>
-          <Carousel className="carousel" autoPlay={false}>
-            {user.projects.map(({ projectImg, projectDes }, id) => {
-              return (
-                <Item
-                  key={id + 1}
-                  projectImg={projectImg}
-                  description={projectDes}
-                />
-              );
-            })}
-          </Carousel>
-        </Grid>
+        <ProfileCarousel user={user} />
       </Grid>
     </div>
   );

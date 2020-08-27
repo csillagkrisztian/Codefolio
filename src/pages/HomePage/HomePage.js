@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import CommentIcon from "@material-ui/icons/Comment";
 
 

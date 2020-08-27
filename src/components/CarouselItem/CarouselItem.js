@@ -1,12 +1,57 @@
 import React from "react";
-import { Paper, Typography } from "@material-ui/core";
+import { Paper, Typography, Grid } from "@material-ui/core";
 import "./CarouselItem.css";
+import { Carousel } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
-export default function Item(props) {
+export default function CarouselComponent(props) {
+  const { array, image, name, description, linkName } = props;
+  if (!array) {
+    return <p>What? No array?</p>;
+  }
   return (
-    <Paper>
-      <img className="itemimage" src={props.projectImg}></img>
-      <Typography>{props.description}</Typography>
-    </Paper>
+    <Grid
+      item
+      container
+      justify="center"
+      alignItems="center"
+      direction="column"
+      xs={8}
+    >
+      <h3>Resources:</h3>
+      <Carousel style={{ width: "auto", margin: "2rem" }}>
+        {array.map((p, id) => {
+          return (
+            <Carousel.Item key={id}>
+              <img
+                style={{
+                  height: "420px",
+                  width: "100%",
+                  overflow: "hidden",
+                  objectFit: "cover",
+                  opacity: "0.1",
+                }}
+                className="d-block "
+                src={"https://learn.g2.com/hubfs/edtech%20image.jpg"}
+                alt={`Slide #${id + 1}`}
+              />
+              <Carousel.Caption>
+                <a href={p[`${linkName}`]}>
+                  <img
+                    className="profileimage"
+                    style={{ width: "250px", height: "250px" }}
+                    src={p[`${image}`]}
+                  />
+                  <Paper>
+                    <h3>{p[`${name}`]}</h3>
+                    <p>{p[`${description}`]}</p>
+                  </Paper>
+                </a>
+              </Carousel.Caption>
+            </Carousel.Item>
+          );
+        })}
+      </Carousel>
+    </Grid>
   );
 }
