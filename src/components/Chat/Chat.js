@@ -4,10 +4,12 @@ import { TextField, Button, Paper } from "@material-ui/core";
 import { apiUrl } from "../../config/constants";
 import { selectUser } from "../../store/user/selectors";
 import { useSelector } from "react-redux";
+import ScrollToBottom from "react-scroll-to-bottom";
 
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { Link } from "react-router-dom";
 import "./Chat.css";
+import logo from "../../images/codefolio_chat_wit.png";
 
 const socket = io.connect(apiUrl);
 
@@ -21,30 +23,43 @@ export default function Chat(props) {
 
   const onMessageSubmit = (e) => {
     e.preventDefault();
-    if (!state) {
+    if (!state || !state.message) {
       return;
     }
-    const { name, message } = state;
-    socket.emit("message", { name: user.name, message });
-    setState({ message: "", name });
+    const { name, message, image } = state;
+    socket.emit("message", { name: user.name, message, image: user.userImg });
+    setState({ message: "", name, image });
   };
 
   useEffect(() => {
     setState({ ...state, name: user.name });
   }, []);
   useEffect(() => {
-    socket.on("message", ({ name, message }) => {
-      console.log("got message!", message, name);
-      setChat([...chat, { name, message }]);
+    socket.on("message", ({ name, message, image }) => {
+      console.log("got message!", message, name, image);
+      setChat([...chat, { name, message, image }]);
     });
   });
 
   const renderChat = () => {
-    return chat.map(({ name, message }, index) => (
+    return chat.map(({ name, message, image }, index) => (
       <div key={index}>
-        <p>
-          {name}:<span>{message}</span>
-        </p>
+        <div className="chat-popup">
+          <img
+            style={{
+              padding: "2px",
+              marginBottom: "0px",
+              display: "block",
+              width: "36px",
+              height: "36px",
+              overflow: "hidden",
+              objectFit: "cover",
+              borderRadius: "50%",
+            }}
+            src={image}
+          ></img>
+          <span style={{ color: "blue" }}>{name}</span> :<span>{message}</span>
+        </div>
       </div>
     ));
   };
@@ -61,31 +76,41 @@ export default function Chat(props) {
     </div>
   ) : (
     <div className="chat">
-      <h2 style={{ margin: "2rem", color: "white" }}>Welcome {user.name}!</h2>
-      <Paper className="render-chat">{renderChat()}</Paper>
+      <img
+        src={logo}
+        style={{
+          display: "block",
+          width: "208px",
+          height: "auto",
+          marginLeft: "auto",
+          marginRight: "auto",
+          color: "white",
+        }}
+      />
+      <ScrollToBottom>
+        <div className="render-chat">{renderChat()}</div>
+      </ScrollToBottom>
 
       <form className="chat-form" onSubmit={onMessageSubmit}>
-        <Paper>
-          <div style={{ margin: "2rem", padding: "1rem" }}>
-            <TextField
-              name="message"
-              onChange={(e) => onTextChange(e)}
-              value={state.message}
-              id="outlined-multiline-static"
-              variant="outlined"
-              lable="Message"
-            />
-          </div>
-          <div
-            style={{
-              justifyContent: "center",
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            <button>Send Message</button>
-          </div>
-        </Paper>
+        <div style={{ margin: "5px", marginLeft: "12px", padding: "1rem" }}>
+          <TextField
+            name="message"
+            onChange={(e) => onTextChange(e)}
+            value={state.message}
+            id="outlined-multiline-static"
+            variant="outlined"
+            lable="Message"
+          />
+        </div>
+        <div
+          style={{
+            justifyContent: "center",
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <button>Send Message</button>
+        </div>
       </form>
     </div>
   );
