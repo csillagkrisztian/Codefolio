@@ -11,6 +11,7 @@ import GitHubIcon from "@material-ui/icons/GitHub";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import { Carousel } from "react-bootstrap";
 import ResourcePicture from "../../components/ResourcePicture";
+import ProfileCarousel from "../../components/CarouselItem/ProfileCarousel";
 
 export default function ProfilePage() {
   const { id } = useParams();
@@ -56,31 +57,7 @@ export default function ProfilePage() {
             <a href={user.linkedinLink}>LinkedIn</a>
           </Typography>
         </Grid>
-        <Grid item container justify="center" alignItems="center" xs={9}>
-          <Carousel>
-            {user.projects.map((p, id) => {
-              return (
-                <Carousel.Item key={id}>
-                  <img
-                    style={{
-                      height: "420px",
-                      overflow: "hidden",
-                      objectFit: "cover",
-                    }}
-                    className="d-block w-100 "
-                    src={p.projectImg}
-                    alt={`Slide #${id + 1}`}
-                  />
-                  <Carousel.Caption>
-                    <Paper>
-                      <h3>{p.projectName}</h3>
-                    </Paper>
-                  </Carousel.Caption>
-                </Carousel.Item>
-              );
-            })}
-          </Carousel>
-        </Grid>
+        <ProfileCarousel user={user} />
       </Grid>
     </div>
   );
