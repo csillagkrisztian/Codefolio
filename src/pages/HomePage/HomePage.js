@@ -5,6 +5,7 @@ import { fetchPosts, searchPost, emptySearch } from '../../store/projects/action
 import { projects, searchResults } from '../../store/projects/selector';
 import './HomePage.css';
 
+import { makeStyles } from '@material-ui/core/styles';
 import { Paper, Drawer, Button, Icon } from "@material-ui/core";
 import SearchBar from "material-ui-search-bar";
 
@@ -18,9 +19,16 @@ export default function HomePage() {
   const searchedPosts = useSelector(searchResults);
   const [projectAray, set_projectArray] = useState(allPosts);
   const [searchText, set_searchText] = useState('');
-  console.log(allPosts);
 
 
+  const useStyles = makeStyles({
+    list: {
+      width: 250,
+    },
+    fullList: {
+      width: 'auto',
+    },
+  });
 
   useEffect(function () {
     dispatch(fetchPosts);
@@ -49,7 +57,7 @@ export default function HomePage() {
     }
 
   }
-  console.log(searchedPosts);
+
 
 
   function Projects(props) {
@@ -66,11 +74,11 @@ export default function HomePage() {
   }
 
   return (
-    <div >
+    <div className="home-page" >
 
 
       <div className="container">
-
+        <h3 className="center">Search projects</h3>
         <SearchBar onCancelSearch={deleteText} value={searchText} onChange={searchProjects} className="search-bar" />
 
         {allPosts.length > 0 ? <div>
@@ -80,7 +88,6 @@ export default function HomePage() {
           : <h1>Loading</h1>}
 
       </div>
-
 
     </div>
   );

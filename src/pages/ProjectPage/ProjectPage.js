@@ -20,82 +20,86 @@ export default function ProfilePage() {
 
   const projectViewed = useSelector(selectProjectViewed);
 
-  return !projectViewed ? (
-    <Loading />
-  ) : (
-    <div className="root">
-      <Grid container justify="center" spacing={4}>
-        <Grid item container justify="center" xs={12}>
-          <Grid item xs={3}>
-            <br />
-            <Typography>Posted by:</Typography>
-            <img
-              className="profileimage"
-              src={projectViewed.user.userImg}
-            ></img>
-            <Typography>
-              Github:
-              <br />
-              {projectViewed.user.githubLink}
-            </Typography>
-            <Typography>
-              LinkedIn:
-              <br />
-              {projectViewed.user.linkedinLink}
-            </Typography>
-            <Typography>
-              Front-end repo:
-              <br />
-              {projectViewed.project.feLink}
-            </Typography>
-            <Typography>
-              Back-end repo:
-              <br />
-              {projectViewed.project.beLink}
-            </Typography>
-          </Grid>
-          <Grid
-            item
-            container
-            justify="center"
-            alignItems="center"
-            direction="column"
-            spacing={5}
-            xs={8}
-          >
-            <Grid item xs>
-              <h1 className="title">{projectViewed.project.projectName}</h1>
-            </Grid>
-            <Grid item xs>
-              {projectViewed.project.tags.map((t, id) => {
-                return (
-                  <Chip key={id + 1} variant="outlined" label={t.tagName} />
-                );
-              })}
-            </Grid>
-            <img
-              className="projectimage"
-              src={projectViewed.project.projectImg}
-            ></img>
-            <Typography>{projectViewed.project.projectDes}</Typography>
+  return <div className="project-page">
 
-            <Grid item xs>
-              <Carousel autoPlay={false}></Carousel>
-              {projectViewed.project.resources.map(
-                ({ projectImg, projectDes }, id) => {
-                  return (
-                    <Item
-                      key={id + 1}
-                      projectImg={projectImg}
-                      description={projectDes}
-                    />
-                  );
-                }
-              )}
+    {!projectViewed ? (
+      <Loading />
+    ) : (
+        <div className="root">
+          <Grid container justify="center" spacing={4}>
+            <Grid item container justify="center" xs={12}>
+              <Grid item xs={3}>
+                <br />
+                <Typography>Posted by:</Typography>
+                <img
+                  className="profileimage"
+                  src={projectViewed.user.userImg}
+                ></img>
+                <Typography>
+                  Github:
+              <br />
+                  {projectViewed.user.githubLink}
+                </Typography>
+                <Typography>
+                  LinkedIn:
+              <br />
+                  {projectViewed.user.linkedinLink}
+                </Typography>
+                <Typography>
+                  Front-end repo:
+              <br />
+                  {projectViewed.project.feLink}
+                </Typography>
+                <Typography>
+                  Back-end repo:
+              <br />
+                  {projectViewed.project.beLink}
+                </Typography>
+              </Grid>
+              <Grid
+                item
+                container
+                justify="center"
+                alignItems="center"
+                direction="column"
+                spacing={5}
+                xs={8}
+              >
+                <Grid item xs>
+                  <h1 className="title">{projectViewed.project.projectName}</h1>
+                </Grid>
+                <Grid item xs>
+                  {projectViewed.project.tags.map((t, id) => {
+                    return (
+                      <Chip key={id + 1} variant="outlined" label={t.tagName} />
+                    );
+                  })}
+                </Grid>
+                <img
+                  className="projectimage"
+                  src={projectViewed.project.projectImg}
+                ></img>
+                <Typography>{projectViewed.project.projectDes}</Typography>
+
+                <Grid item xs>
+                  <Carousel autoPlay={false}></Carousel>
+                  {projectViewed.project.resources.map(
+                    ({ projectImg, projectDes }, id) => {
+                      return (
+                        <Item
+                          key={id + 1}
+                          projectImg={projectImg}
+                          description={projectDes}
+                        />
+                      );
+                    }
+                  )}
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
-        </Grid>
-      </Grid>
-    </div>
-  );
+        </div>
+
+      )}
+  </div>
 }
