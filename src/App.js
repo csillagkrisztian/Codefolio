@@ -25,9 +25,8 @@ function App() {
   const dispatch = useDispatch();
   const [open, set_open] = useState(false);
   const toggleDrawer = () => {
-    console.log('blip blop')
     set_open(!open);
-  }
+  };
   const isLoading = useSelector(selectAppLoading);
   const [state, setState] = useState({ message: "", name: "" });
   const [chat, setChat] = useState([]);
@@ -42,16 +41,18 @@ function App() {
         fontSize="large"
         onClick={toggleDrawer}
         className="chat-btn"
-        style={open ? { right: '250px', transition: 'right .4s' } : { right: "25px", transition: 'right .4s;' }}
+        style={
+          open
+            ? { right: "250px", transition: "right .4s" }
+            : { right: "25px", transition: "right .4s;" }
+        }
       />
-
 
       <Navigation />
 
       <MessageBox />
       {isLoading ? <Loading /> : null}
       <div className="app-flex">
-
         <div className="rendered-page">
           <Switch>
             <Route exact path="/" component={HomePage} />
@@ -65,12 +66,22 @@ function App() {
           </Switch>
         </div>
 
-        <div style={open ? { transform: `translateX(-240px)` } : { transform: `translateX(0px)` }} className="chat-menu">
-          <Chat state={state} setState={setState} chat={chat} setChat={setChat} />
+        <div
+          style={
+            open
+              ? { transform: `translateX(-240px)` }
+              : { transform: `translateX(0px)` }
+          }
+          className="chat-menu"
+        >
+          <Chat
+            state={state}
+            setState={setState}
+            chat={chat}
+            setChat={setChat}
+          />
         </div>
       </div>
-
-
     </div>
   );
 }

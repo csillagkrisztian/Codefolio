@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import CommentIcon from "@material-ui/icons/Comment";
-
 
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -24,11 +22,9 @@ export default function HomePage() {
   const allPosts = useSelector(projects);
 
   const searchedPosts = useSelector(searchResults);
-  const [projectAray, set_projectArray] = useState(allPosts);
 
   const [searchText, set_searchText] = useState("");
   console.log(allPosts);
-
 
   useEffect(function () {
     dispatch(fetchPosts);
@@ -53,26 +49,28 @@ export default function HomePage() {
     }
   }
 
-
   function Projects(props) {
     return (
       <div>
         <Link to={`/project/${props.id}`}>
           <Paper className="project-post">
             <div
-              style={{ backgroundImage: `linear-gradient(#3d3d3dbf, #3d3d3dbf), url(${props.img}) ` }}
+              style={{
+                backgroundImage: `linear-gradient(#3d3d3dbf, #3d3d3dbf), url(${props.img}) `,
+              }}
               className="post-img"
             >
               <h3>{props.title}</h3>
             </div>
 
-
-
             <div className="post-text" style={{ backgroundColor: "#fff" }}>
               <div>
-                {props.tags && props.tags.map((t, id) => {
-                  return <Chip key={id + 1} variant="outlined" label={t.tagName} />;
-                })}
+                {props.tags &&
+                  props.tags.map((t, id) => {
+                    return (
+                      <Chip key={id + 1} variant="outlined" label={t.tagName} />
+                    );
+                  })}
               </div>
 
               <p>{props.text}</p>
@@ -82,20 +80,14 @@ export default function HomePage() {
                 {props.comments && props.comments.length}
                 <CommentIcon color="secondary" fontSize="large" />
               </div>
-
             </div>
-
-
-
           </Paper>
         </Link>
-
       </div>
     );
   }
 
   return (
-
     <div className="home-page">
       <div className="container center">
         <h3 className="center">Search projects</h3>
@@ -110,30 +102,33 @@ export default function HomePage() {
           <div>
             {!searchText
               ? allPosts.map((project, id) => (
-                <Projects
-                  key={id}
-                  img={project.projectImg}
-                  title={project.projectName}
-                  text={project.projectDesc}
-                  id={project.id}
-                  tags={project.tags}
-                  likes={project.likes}
-                  comments={project.comments}
-
-                />
-              ))
+                  <Projects
+                    key={id}
+                    img={project.projectImg}
+                    title={project.projectName}
+                    text={project.projectDesc}
+                    id={project.id}
+                    tags={project.tags}
+                    likes={project.likes}
+                    comments={project.comments}
+                  />
+                ))
               : searchedPosts.map((project, id) => (
-                <Projects
-                  key={id}
-                  img={project.projectImg}
-                  title={project.projectName}
-                  text={project.projectDesc}
-                />
-              ))}
+                  <Projects
+                    key={id}
+                    img={project.projectImg}
+                    title={project.projectName}
+                    text={project.projectDesc}
+                    id={project.id}
+                    tags={project.tags}
+                    likes={project.likes}
+                    comments={project.comments}
+                  />
+                ))}
           </div>
         ) : (
-            <h1>Loading</h1>
-          )}
+          <h1>Loading</h1>
+        )}
       </div>
     </div>
   );
