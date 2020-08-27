@@ -8,17 +8,24 @@ import { selectProjectToBeResources } from "../../store/projects/selector";
 import { postNewProject, deleteProjectToBe } from "../../store/projects/action";
 import Item from "../../components/CarouselItem/CarouselItem";
 import ResourcePicture from "../../components/ResourcePicture";
+
 import './PostPage.css';
+
+import axios from "axios";
+
 
 export default function PostPage() {
   const [name, setName] = useState("");
   const [feRepo, setFeRepo] = useState("");
   const [beRepo, setBeRepo] = useState("");
   const [youtubeUrl, setYoutubeUrl] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+  const [imageUrl, setImageUrl] = useState(
+    "https://as1.ftcdn.net/jpg/02/70/22/86/500_F_270228625_yujevz1E4E45qE1mJe3DyyLPZDmLv4Uj.jpg"
+  );
   const [description, setDescription] = useState("");
   const [tags, setTags] = useState("");
   const [valid, setValid] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const resources = useSelector(selectProjectToBeResources);
   const dispatch = useDispatch();
@@ -49,9 +56,26 @@ export default function PostPage() {
 
   const tagsArray = tags.split(/[\s,]+/);
   const tagsArrayObjects = tagsArray.map((tag) => {
-    return { tagName: tag };
+    return { tagName: tag.toLowerCase() };
   });
   console.log(tagsArrayObjects);
+  //=========================================>uploading Image API
+  const uploadImage = async (e) => {
+    const files = e.target.files[0];
+    const formData = new FormData();
+    formData.append("upload_preset", "bugtracker1");
+    formData.append("file", files);
+    setLoading(true);
+
+    axios
+      .post("https://api.cloudinary.com/v1_1/dsyta0pbg/image/upload", formData)
+      .then((res) => setImageUrl(res.data.url))
+      .then(setLoading(false))
+      .catch((err) => console.log(err));
+    console.log("sucee finish");
+  };
+
+  //============================================>End
 
   const clickHandler = () => {
     dispatch(
@@ -118,16 +142,15 @@ export default function PostPage() {
                 type="text"
               ></Form.Control>
             </Form.Group>
-            <Form.Group>
-              <Form.Label>Image Url</Form.Label>
-              <Form.Control
-                value={imageUrl}
-                onChange={(e) => {
-                  setImageUrl(e.target.value);
-                }}
-                type="url"
-              ></Form.Control>
+            <Form.Group controlId="formBasicImageUrl">
+              <Form.Label>Image url</Form.Label>
+              <Form.Control onChange={uploadImage} type="file" required />
             </Form.Group>
+            {loading ? (
+              <h5>loading...</h5>
+            ) : (
+              <img src={imageUrl} style={{ width: "45px", height: "45px" }} />
+            )}
             <Form.Group>
               <Form.Label>Youtube Url</Form.Label>
               <Form.Control

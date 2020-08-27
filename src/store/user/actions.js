@@ -149,3 +149,34 @@ export const getProfile = (id) => {
 export const addUser = (data) => {
   return { type: "ADD_USER", payload: data };
 };
+
+export const likeClick = (id) => {
+  return async (dispatch, getState) => {
+    const token = selectToken(getState());
+    if (token === null) return;
+    console.log(token);
+    // get token from the stat
+    dispatch(appLoading());
+    try {
+      // if we do have a token,
+
+      const response = await axios.post(
+        `${apiUrl}/projects/${id}/like`,
+        { id: id },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      console.log(response);
+      dispatch(appDoneLoading());
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.message);
+      } else {
+        console.log(error);
+      }
+      dispatch(appDoneLoading());
+    }
+  };
+};

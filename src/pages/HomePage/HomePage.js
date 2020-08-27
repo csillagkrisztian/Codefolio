@@ -1,16 +1,24 @@
-
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchPosts, searchPost, emptySearch } from '../../store/projects/action';
-import { projects, searchResults } from '../../store/projects/selector';
-import './HomePage.css';
+import { Link } from "react-router-dom";
 
-import { makeStyles } from '@material-ui/core/styles';
-import { Paper, Drawer, Button, Icon } from "@material-ui/core";
+
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import CommentIcon from "@material-ui/icons/Comment";
+
+
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchPosts,
+  searchPost,
+  emptySearch,
+} from "../../store/projects/action";
+import { projects, searchResults } from "../../store/projects/selector";
+import "./HomePage.css";
+
+import { Paper, Drawer, Button, Icon, Chip } from "@material-ui/core";
+
 import SearchBar from "material-ui-search-bar";
-
-
-
 
 export default function HomePage() {
   const dispatch = useDispatch();
@@ -18,25 +26,14 @@ export default function HomePage() {
 
   const searchedPosts = useSelector(searchResults);
   const [projectAray, set_projectArray] = useState(allPosts);
-  const [searchText, set_searchText] = useState('');
 
+  const [searchText, set_searchText] = useState("");
+  console.log(allPosts);
 
-  const useStyles = makeStyles({
-    list: {
-      width: 250,
-    },
-    fullList: {
-      width: 'auto',
-    },
-  });
 
   useEffect(function () {
     dispatch(fetchPosts);
   }, []);
-
-
-
-
 
   function deleteText() {
     set_searchText("");
@@ -49,47 +46,86 @@ export default function HomePage() {
       dispatch(emptySearch);
     }
     const newData = allPosts.filter(function (a) {
-      return a.tags.find(tag => tag.tagName === e);
+      return a.tags.find((tag) => tag.tagName === e);
     });
     if (newData.length > 0) {
       console.log(newData);
       dispatch(searchPost(newData));
     }
-
   }
-
 
 
   function Projects(props) {
-    return <Paper className="project-post" >
-      <div style={{ backgroundImage: `url(${props.img})` }} className="post-img">
-      </div>
+    return (
       <div>
-        <h3>{props.title}</h3>
+        <Link to={`/project/${props.id}`}>
+          <Paper className="project-post">
+            <div
+              style={{ backgroundImage: `url(${props.img})` }}
+              className="post-img"
+            ></div>
+            <div>
+              <h3>{props.title}</h3>
+
+              <div style={{ backgroundColor: "#fff" }}>
+                {props.likes.length}
+                <FavoriteIcon color="secondary" fontSize="large" />
+                {props.comments.length}
+                <CommentIcon color="secondary" fontSize="large" />
+              </div>
+            </div>
+            <div>
+              <p>{props.text}</p>
+            </div>
+          </Paper>
+        </Link>
+        {props.tags.map((t, id) => {
+          return <Chip key={id + 1} variant="outlined" label={t.tagName} />;
+        })}
       </div>
-      <div>
-        <p>{props.text}</p>
-      </div>
-    </Paper>
+    );
   }
 
   return (
-    <div className="home-page" >
 
-
+    <div className="home-page">
       <div className="container">
-        <h3 className="center">Search projects</h3>
-        <SearchBar onCancelSearch={deleteText} value={searchText} onChange={searchProjects} className="search-bar" />
+<h3 className="center">Search projects</h3>
+        <SearchBar
+          onCancelSearch={deleteText}
+          value={searchText}
+          onChange={searchProjects}
+          className="search-bar"
+        />
 
-        {allPosts.length > 0 ? <div>
-          {!searchText ? allPosts.map((project, id) => <Projects key={id} img={project.projectImg} title={project.projectName} text={project.projectDesc} />) : searchedPosts.map((project, id) => <Projects key={id} img={project.projectImg} title={project.projectName} text={project.projectDesc} />
-          )}
-        </div>
-          : <h1>Loading</h1>}
-
+        {allPosts.length > 0 ? (
+          <div>
+            {!searchText
+              ? allPosts.map((project, id) => (
+                  <Projects
+                    key={id}
+                    img={project.projectImg}
+                    title={project.projectName}
+                    text={project.projectDesc}
+                    id={project.id}
+                    tags={project.tags}
+                    likes={project.likes}
+                    comments={project.comments}
+                  />
+                ))
+              : searchedPosts.map((project, id) => (
+                  <Projects
+                    key={id}
+                    img={project.projectImg}
+                    title={project.projectName}
+                    text={project.projectDesc}
+                  />
+                ))}
+          </div>
+        ) : (
+          <h1>Loading</h1>
+        )}
       </div>
-
     </div>
   );
 }
-
