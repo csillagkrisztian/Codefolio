@@ -89,7 +89,7 @@ export default function ResourceForm(props) {
           ></Form.Control>
         </Form.Group>
         <Form.Group controlId="formBasicImageUrl">
-          <Form.Label>Image url</Form.Label>
+          <Form.Label>Image</Form.Label>
           <Form.Control onChange={uploadImage} type="file" required />
         </Form.Group>
         {loading ? (
@@ -98,7 +98,7 @@ export default function ResourceForm(props) {
           <img src={imgUrl} style={{ width: "45px", height: "45px" }} />
         )}
         <Form.Group>
-          <Form.Label>Project Description</Form.Label>
+          <Form.Label>Resource Description</Form.Label>
           <Form.Control
             onChange={(e) => {
               setDescription(e.target.value);
