@@ -5,11 +5,11 @@ import { apiUrl } from "../../config/constants";
 import { selectUser } from "../../store/user/selectors";
 import { useSelector } from "react-redux";
 import ScrollToBottom from "react-scroll-to-bottom";
-
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { Link } from "react-router-dom";
 import "./Chat.css";
 import logo from "../../images/codefolio_chat_wit.png";
+import reactEmoji from "react-emoji";
 
 const socket = io.connect(apiUrl);
 
@@ -58,7 +58,8 @@ export default function Chat(props) {
             }}
             src={image}
           ></img>
-          <span style={{ color: "blue" }}>{name}</span> :<span>{message}</span>
+          <span style={{ color: "blue" }}>{name}</span> :
+          <span>{reactEmoji.emojify(message)}</span>
         </div>
       </div>
     ));
