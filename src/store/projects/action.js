@@ -91,6 +91,17 @@ export const postNewProject = ({
 
     dispatch(appLoading());
     try {
+      console.log({
+        projectName,
+        feLink,
+        beLink,
+        projectImg,
+        ytUrl,
+        projectDesc,
+        resources,
+        tags,
+      });
+
       // if we do have a token,
       // check wether it is still valid or if it is expired
       const response = await axios.post(

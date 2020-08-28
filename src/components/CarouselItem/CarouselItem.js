@@ -19,7 +19,7 @@ export default function CarouselComponent(props) {
       style={{ marginBottom: "8rem" }}
       xs={12}
     >
-      <Carousel style={{ width: "auto", margin: "2rem" }}>
+      <Carousel style={{ width: "auto", margin: "2rem", zIndex: "2" }}>
         {array.map((p, id) => {
           return (
             <Carousel.Item key={id}>

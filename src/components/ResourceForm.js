@@ -36,9 +36,10 @@ export default function ResourceForm(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if ((!name, !link, !imgUrl, !description)) {
-      console.log("what the heck?");
+    if (!name || !link || !imgUrl || !description) {
+      alert("Please fill in the resources!");
     } else {
+      console.log("name", name, "link", link, imgUrl, description);
       dispatch(
         addResource({
           title: name,
