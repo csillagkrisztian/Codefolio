@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 
-import { Grid, Typography, Chip, Button } from "@material-ui/core";
+import { Grid, Typography, Chip, Button, Paper } from "@material-ui/core";
 
 import Comment from "../../components/Comment/Comment.js";
 import "./ProjectPage.css";
@@ -52,105 +52,108 @@ export default function ProfilePage() {
   return !projectViewed ? (
     <Loading />
   ) : (
-    <div className="root">
-      <Grid container justify="center" spacing={4}>
-        <Grid item container justify="center" xs={12}>
-          <Grid item xs={3}>
-            <br />
-            <Typography>Posted by:</Typography>
-            <h2>{projectViewed.user.name}</h2>
-            <Link to={`/profile/${projectViewed.user.id}`}>
-              <img
-                className="profileimage"
-                src={projectViewed.user.userImg}
-              ></img>
-            </Link>
+      <div className="root">
+        <Grid className="project-grid" container justify="center" spacing={4}>
+          <Grid item container justify="center" xs={12}>
+            <Grid item xs={3}>
+              <br />
+              <Typography>Posted by:</Typography>
+              <h2>{projectViewed.user.name}</h2>
+              <Link to={`/profile/${projectViewed.user.id}`}>
+                <img
+                  className="profileimage"
+                  src={projectViewed.user.userImg}
+                ></img>
+              </Link>
 
-            <Typography>
-              <GitHubIcon />
-              <a href={projectViewed.user.githubLink}>GitHub</a>
-            </Typography>
-            <Typography>
-              <LinkedInIcon />
-              <a href={projectViewed.user.linkedinLink}>LinkedIn</a>
-            </Typography>
+              <Typography>
+                <GitHubIcon />
+                <a href={projectViewed.user.githubLink}>GitHub</a>
+              </Typography>
+              <Typography>
+                <LinkedInIcon />
+                <a href={projectViewed.user.linkedinLink}>LinkedIn</a>
+              </Typography>
 
-            <Typography>
-              <WebIcon />
-              <a href={projectViewed.project.feLink}>Front-end repo</a>
-            </Typography>
-            <Typography>
-              <StorageIcon />
-              <a href={projectViewed.project.beLink}>Back-end repo</a>
-            </Typography>
-            <Typography>
-              <YouTubeIcon />
-              <a href={projectViewed.project.ytUrl}>Youtube Link</a>
-            </Typography>
-          </Grid>
-          <Grid
-            item
-            container
-            justify="center"
-            alignItems="center"
-            direction="column"
-            spacing={5}
-            xs={8}
-          >
-            <Grid item xs>
-              <h1 className="title">{projectViewed.project.projectName}</h1>
+              <Typography>
+                <WebIcon />
+                <a href={projectViewed.project.feLink}>Front-end repo</a>
+              </Typography>
+              <Typography>
+                <StorageIcon />
+                <a href={projectViewed.project.beLink}>Back-end repo</a>
+              </Typography>
+              <Typography>
+                <YouTubeIcon />
+                <a href={projectViewed.project.ytUrl}>Youtube Link</a>
+              </Typography>
             </Grid>
-            <Grid item xs>
-              {projectViewed.project.tags.map((t, id) => {
-                return (
-                  <Chip key={id + 1} variant="outlined" label={t.tagName} />
-                );
-              })}
+            <Grid
+              item
+              container
+              justify="center"
+              alignItems="center"
+              direction="column"
+              spacing={5}
+              xs={8}
+            ><Paper className="post-article">
+                <Grid item xs>
+                  <h1 className="title">{projectViewed.project.projectName}</h1>
+                </Grid>
+                <Grid item xs>
+                  {projectViewed.project.tags.map((t, id) => {
+                    return (
+                      <Chip className="tags-grid" key={id + 1} variant="outlined" label={t.tagName} />
+                    );
+                  })}
+                </Grid>
+                <img
+                  className="projectimage"
+                  src={projectViewed.project.projectImg}
+                ></img>
+                <Typography className="project-desc">{projectViewed.project.projectDesc}</Typography>
+                <div style={{ backgroundColor: "#fff" }}>
+                  {projectViewed.project.likes.length}
+                  {likeCheck ? (
+                    <Button onClick={heartClick}>
+                      <FavoriteIcon color="secondary" fontSize="large" />
+                    </Button>
+                  ) : (
+                      <Button onClick={heartClick}>
+                        <FavoriteBorderIcon color="secondary" fontSize="large" />
+                      </Button>
+                    )}
+
+                  {projectViewed.project.comments.length}
+                  {!user.token ? (
+                    <Button
+                      onClick={() => {
+                        alert("You are not logged in!");
+                      }}
+                    >
+                      <CommentIcon color="secondary" fontSize="large" />
+                    </Button>
+                  ) : (
+                      <Button onClick={commentClick}>
+                        <CommentIcon color="secondary" fontSize="large" />
+                      </Button>
+                    )}
+                </div>
+
+                {comments}
+
+                <CarouselComponent
+                  array={projectViewed.project.resources}
+                  name="title"
+                  description="resourceDes"
+                  linkName="link"
+                  image="resourceImg"
+                />
+              </Paper>
+
             </Grid>
-            <img
-              className="projectimage"
-              src={projectViewed.project.projectImg}
-            ></img>
-            <div style={{ backgroundColor: "#fff" }}>
-              {projectViewed.project.likes.length}
-              {likeCheck ? (
-                <Button onClick={heartClick}>
-                  <FavoriteIcon color="secondary" fontSize="large" />
-                </Button>
-              ) : (
-                <Button onClick={heartClick}>
-                  <FavoriteBorderIcon color="secondary" fontSize="large" />
-                </Button>
-              )}
-
-              {projectViewed.project.comments.length}
-              {!user.token ? (
-                <Button
-                  onClick={() => {
-                    alert("You are not logged in!");
-                  }}
-                >
-                  <CommentIcon color="secondary" fontSize="large" />
-                </Button>
-              ) : (
-                <Button onClick={commentClick}>
-                  <CommentIcon color="secondary" fontSize="large" />
-                </Button>
-              )}
-            </div>
-            <Typography>{projectViewed.project.projectDesc}</Typography>
-            {comments}
-
-            <CarouselComponent
-              array={projectViewed.project.resources}
-              name="title"
-              description="resourceDes"
-              linkName="link"
-              image="resourceImg"
-            />
           </Grid>
         </Grid>
-      </Grid>
-    </div>
-  );
+      </div>
+    );
 }
