@@ -66,7 +66,7 @@ export default function Chat(props) {
   };
 
   return !user.token ? (
-    <div>
+    <div style={{ zIndex: "300" }}>
       <p>
         <AccountCircleIcon />
         You need to be logged in to chat!

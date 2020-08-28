@@ -26,6 +26,7 @@ body {
   width: 350px;
   transition: all 0.4s;
   overflow: hidden;
+  z-index: 500;
   /* transform: translateX(200px); */
 
   /* display: none; */
