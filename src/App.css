@@ -1,10 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap");
 .App {
   font-family: "Roboto Slab", serif;
-  background-color: rgba(240, 248, 255, 0.527);
+  background-color: rgba(53, 53, 53, 0.698);
   overflow: hidden;
   height: 100vh;
   overflow: hidden;
+  color: #fff;
 }
 body {
   box-sizing: border-box;
