@@ -48,8 +48,8 @@ export default function SignUp() {
   function submitForm(event) {
     event.preventDefault();
 
-    dispatch(signUp(name, email, password, github, linkedin, image));
-    console.log(name, email, password, github, linkedin, image);
+    dispatch(signUp(name, email, password, github, linkedin, image, motto));
+    console.log(name, email, password, github, linkedin, image, motto);
 
     setEmail("");
     setPassword("");
