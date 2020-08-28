@@ -151,7 +151,7 @@ export default function PostPage() {
               ></Form.Control>
             </Form.Group>
             <Form.Group controlId="formBasicImageUrl">
-              <Form.Label>Image url</Form.Label>
+              <Form.Label>Image</Form.Label>
               <Form.Control onChange={uploadImage} type="file" required />
             </Form.Group>
             {loading ? (
