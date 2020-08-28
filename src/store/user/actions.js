@@ -1,6 +1,6 @@
 import { apiUrl } from "../../config/constants";
 import axios from "axios";
-import { selectToken } from "./selectors";
+import { selectToken, selectUser } from "./selectors";
 import {
   appLoading,
   appDoneLoading,
@@ -169,6 +169,43 @@ export const likeClick = (id) => {
       );
 
       console.log(response);
+      dispatch(appDoneLoading());
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.message);
+      } else {
+        console.log(error);
+      }
+      dispatch(appDoneLoading());
+    }
+  };
+};
+
+export const updateProfile = (userObject) => {
+  return async (dispatch, getState) => {
+    const token = selectToken(getState());
+    const user = selectUser(getState());
+    console.log("user", user);
+    console.log("userObject", userObject);
+    if (token === null) return;
+    // get token from the stat
+    dispatch(appLoading());
+    try {
+      // if we do have a token,
+
+      const response = await axios.patch(
+        `${apiUrl}/users/${user.id}`,
+        userObject,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      dispatch(getUserWithStoredToken());
+      dispatch(
+        showMessageWithTimeout("success", false, "Profile Updated", 1500)
+      );
+
       dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {

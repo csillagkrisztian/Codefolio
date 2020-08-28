@@ -20,7 +20,7 @@ import PostPage from "./pages/PostPage/PostPage";
 import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
 import { Drawer } from "@material-ui/core";
 import Chat from "./components/Chat/Chat";
-import { currentMode } from './store/appState/selectors';
+import { currentMode } from "./store/appState/selectors";
 
 function App() {
   const dispatch = useDispatch();
@@ -38,7 +38,14 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div style={!lightMode ? { backgroundColor: `rgba(240, 248, 255, 0.527)`, color: '#171717' } : { backgroundColor: `rgba(33, 33, 33, 0.9)`, color: `#fff` }} className="App">
+    <div
+      style={
+        !lightMode
+          ? { backgroundColor: `rgba(240, 248, 255, 0.527)`, color: "#171717" }
+          : { backgroundColor: `rgba(33, 33, 33, 0.9)`, color: `#fff` }
+      }
+      className="App"
+    >
       <ChatBubbleOutlineIcon
         fontSize="large"
         onClick={toggleDrawer}
@@ -46,7 +53,7 @@ function App() {
         style={
           open
             ? { right: "350px", transition: "right .4s" }
-            : { right: "25px", transition: "right .4s;" }
+            : { right: "25px", transition: "right .4s" }
         }
       />
 
