@@ -32,7 +32,8 @@ export const signUp = (
   password,
   githubLink,
   linkedinLink,
-  userImg
+  userImg,
+  motto
 ) => {
   return async (dispatch, getState) => {
     dispatch(appLoading());
@@ -44,6 +45,7 @@ export const signUp = (
         githubLink,
         linkedinLink,
         userImg,
+        motto,
       });
 
       dispatch(loginSuccess(response.data));
