@@ -38,7 +38,7 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div style={!lightMode ? { backgroundColor: `#fff` } : { backgroundColor: `rgba(33, 33, 33, 0.9)`, color: `#fff` }} className="App">
+    <div style={!lightMode ? { backgroundColor: `rgba(240, 248, 255, 0.527)`, color: '#171717' } : { backgroundColor: `rgba(33, 33, 33, 0.9)`, color: `#fff` }} className="App">
       <ChatBubbleOutlineIcon
         fontSize="large"
         onClick={toggleDrawer}
