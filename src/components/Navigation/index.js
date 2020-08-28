@@ -35,7 +35,7 @@ export default function Navigation() {
     <div>
       <div className="navigating-bar">
         <div className="center">
-          <img style={{ height: "50px", width: "auto" }} src={logo}></img>
+          <img style={{ height: "60px", width: "auto" }} src={logo}></img>
         </div>
         <div className="navi">
           <NavLink exact activeClassName="active-link" to="/">
