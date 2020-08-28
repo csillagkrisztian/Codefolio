@@ -34,3 +34,5 @@ export const showMessageWithTimeout = (
     setTimeout(() => dispatch(clearMessage()), timeout);
   };
 };
+
+export const toggleDarkmode = async (dispatch, getState) => dispatch({ type: "toggleDarkmode" });

@@ -1,0 +1,39 @@
+.search-bar{
+    width: 70%;
+    margin: 15px auto;
+}
+
+.project-post{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    height: 250px;
+    width: 70%;
+    margin: 15px auto;
+    overflow: hidden;
+
+}
+
+.project-post div{
+    padding: 5px;
+    padding-left:15px ;
+}
+.post-img{
+   background-size: cover;
+   background-position: center;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   color: #fff;
+}
+.home-page{
+    height: 800px;
+    width: 100%;
+    padding: 0 30px;
+}
+
+.post-text{
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

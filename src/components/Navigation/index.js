@@ -1,31 +1,63 @@
 import React from "react";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
-import { NavLink } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
+import { AppBar } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { selectToken } from "../../store/user/selectors";
-import NavbarItem from "./NavbarItem";
 import LoggedIn from "./LoggedIn";
 import LoggedOut from "./LoggedOut";
+import { NavLink } from "react-router-dom";
+import "./Navigation.css";
+import logo from "../../images/CodeFoliowit.png";
+import { toggleDarkmode } from "../../store/appState/actions";
+import { currentMode } from "../../store/appState/selectors";
+import { useDispatch } from "react-redux";
+import WbSunnyIcon from "@material-ui/icons/WbSunny";
+import Brightness2Icon from "@material-ui/icons/Brightness2";
 
 export default function Navigation() {
+  const dispatch = useDispatch();
+  const darkMode = useSelector(currentMode);
   const token = useSelector(selectToken);
 
   const loginLogoutControls = token ? <LoggedIn /> : <LoggedOut />;
 
+  function handleClick(event) {
+    event.preventDefault();
+    console.info("You clicked a breadcrumb.");
+  }
+
+  function switchMode() {
+    // console.log('toggling')
+    dispatch(toggleDarkmode);
+  }
+
   return (
-    <Navbar bg="light" expand="lg">
-      <Navbar.Brand as={NavLink} to="/">
-        YOUR PROJECT NAME
-      </Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav style={{ width: "100%" }} fill>
-          <NavbarItem path="/" linkText="Home" />
-          <NavbarItem path="/other" linkText="Other" />
+    <div>
+      <div className="navigating-bar">
+        <div className="center">
+          <img style={{ height: "50px", width: "auto" }} src={logo}></img>
+        </div>
+        <div className="navi">
+          <NavLink exact activeClassName="active-link" to="/">
+            Home
+          </NavLink>
+          <NavLink activeClassName="active-link" to="/post">
+            New Post
+          </NavLink>
+          <NavLink activeClassName="active-link" to="/aboutus">
+            About
+          </NavLink>
+
           {loginLogoutControls}
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
+        </div>
+        <div className="mode-icon">
+          {!darkMode ? (
+            <Brightness2Icon onClick={switchMode} />
+          ) : (
+            <WbSunnyIcon onClick={switchMode} />
+          )}
+        </div>
+      </div>
+    </div>
   );
 }

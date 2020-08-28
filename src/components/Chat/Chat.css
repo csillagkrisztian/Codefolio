@@ -1,0 +1,50 @@
+.chat {
+  height: 95vh;
+  width: 330px;
+  background-color: rgba(238, 100, 238, 0.81);
+  padding: 20px;
+  background-image: url("https://cutewallpaper.org/21/whatsapp-wallpaper-for-chat/Whatsapp-Wallpaper-Hd-Free-Download-Iphone-6-Wallpaper-.jpg");
+  background-blend-mode: color;
+
+  position: absolute;
+}
+.chat-form {
+  position: absolute;
+  width: 290px;
+  bottom: 70px;
+  height: 150px;
+  background-color: rgba(255, 255, 255, 0.353);
+}
+
+.render-chat {
+  background-color: rgba(255, 255, 255, 0.253);
+  height: 520px;
+  max-width: 350px;
+  border-radius: 5px;
+  padding: 2px;
+  overflow: auto;
+}
+
+.chat-popup {
+  background-color: rgba(255, 255, 255, 0.553);
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgba(100, 222, 238, 0.182);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgba(13, 82, 230, 0.718);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
