@@ -7,7 +7,8 @@ import {
 
 const initialState = {
   loading: false,
-  message: null
+  message: null,
+  darkmode: false,
 };
 
 export default (state = initialState, action) => {
@@ -24,6 +25,13 @@ export default (state = initialState, action) => {
     case CLEAR_MESSAGE:
       return { ...state, message: null };
 
+    case "toggleDarkmode": {
+
+      return {
+        ...state,
+        darkmode: !state.darkmode
+      }
+    }
     default:
       return state;
   }

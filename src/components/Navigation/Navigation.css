@@ -36,3 +36,8 @@
  .app-bar{
     z-index: 1400 !important;
 }
+.mode-icon{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
