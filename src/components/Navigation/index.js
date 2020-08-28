@@ -8,11 +8,11 @@ import LoggedOut from "./LoggedOut";
 import { NavLink } from "react-router-dom";
 import "./Navigation.css";
 import logo from "../../images/CodeFoliowit.png";
-import { toggleDarkmode } from '../../store/appState/actions';
-import { currentMode } from '../../store/appState/selectors';
-import { useDispatch } from 'react-redux';
-import WbSunnyIcon from '@material-ui/icons/WbSunny';
-import Brightness2Icon from '@material-ui/icons/Brightness2';
+import { toggleDarkmode } from "../../store/appState/actions";
+import { currentMode } from "../../store/appState/selectors";
+import { useDispatch } from "react-redux";
+import WbSunnyIcon from "@material-ui/icons/WbSunny";
+import Brightness2Icon from "@material-ui/icons/Brightness2";
 
 export default function Navigation() {
   const dispatch = useDispatch();
@@ -30,7 +30,7 @@ export default function Navigation() {
     // console.log('toggling')
     dispatch(toggleDarkmode);
   }
-  console.log(darkMode);
+
   return (
     <div>
       <div className="navigating-bar">
@@ -51,7 +51,11 @@ export default function Navigation() {
           {loginLogoutControls}
         </div>
         <div className="mode-icon">
-          {!darkMode ? <Brightness2Icon onClick={switchMode} /> : <WbSunnyIcon onClick={switchMode} />}
+          {!darkMode ? (
+            <Brightness2Icon onClick={switchMode} />
+          ) : (
+            <WbSunnyIcon onClick={switchMode} />
+          )}
         </div>
       </div>
     </div>
