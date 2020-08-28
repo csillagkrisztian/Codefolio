@@ -7,7 +7,7 @@
     display: grid;
     grid-template-columns: 1fr 2fr;
     height: 250px;
-        width: 750px;
+    width: 70%;
     margin: 15px auto;
     overflow: hidden;
 

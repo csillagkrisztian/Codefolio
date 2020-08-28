@@ -90,7 +90,7 @@ export default function HomePage() {
   return (
     <div className="home-page">
       <div className="container center">
-        <h3 className="center">Search projects</h3>
+        <h3 className="center-text margin-sm">Search projects</h3>
         <SearchBar
           onCancelSearch={deleteText}
           value={searchText}
@@ -102,33 +102,33 @@ export default function HomePage() {
           <div style={{ marginBottom: "12rem" }}>
             {!searchText
               ? allPosts.map((project, id) => (
-                  <Projects
-                    key={id}
-                    img={project.projectImg}
-                    title={project.projectName}
-                    text={project.projectDesc}
-                    id={project.id}
-                    tags={project.tags}
-                    likes={project.likes}
-                    comments={project.comments}
-                  />
-                ))
+                <Projects
+                  key={id}
+                  img={project.projectImg}
+                  title={project.projectName}
+                  text={project.projectDesc}
+                  id={project.id}
+                  tags={project.tags}
+                  likes={project.likes}
+                  comments={project.comments}
+                />
+              ))
               : searchedPosts.map((project, id) => (
-                  <Projects
-                    key={id}
-                    img={project.projectImg}
-                    title={project.projectName}
-                    text={project.projectDesc}
-                    id={project.id}
-                    tags={project.tags}
-                    likes={project.likes}
-                    comments={project.comments}
-                  />
-                ))}
+                <Projects
+                  key={id}
+                  img={project.projectImg}
+                  title={project.projectName}
+                  text={project.projectDesc}
+                  id={project.id}
+                  tags={project.tags}
+                  likes={project.likes}
+                  comments={project.comments}
+                />
+              ))}
           </div>
         ) : (
-          <h1>Loading</h1>
-        )}
+            <h1>Loading</h1>
+          )}
       </div>
     </div>
   );

@@ -47,3 +47,11 @@ body {
   overflow-y: auto;
   overflow-x: hidden;
 }
+
+.center-text{
+  text-align: center;
+}
+
+.margin-sm{
+  margin: 15px 0;
+}
